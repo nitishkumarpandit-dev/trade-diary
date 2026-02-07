@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Forgot Password - TradingJournal</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#137fec",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark min-h-screen flex flex-col font-display">
+<!-- Top Navigation (Simplified for Auth) -->
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-[#e7edf3] dark:border-slate-800 px-6 py-3 bg-white dark:bg-background-dark/50">
+<div class="flex items-center gap-2 text-[#0d141b] dark:text-white">
+<div class="text-primary">
+<span class="material-symbols-outlined text-3xl">insights</span>
+</div>
+<h2 class="text-lg font-bold leading-tight tracking-tight">TradingJournal</h2>
+</div>
+<div>
+<a class="text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-primary transition-colors" href="#">Help Center</a>
+</div>
+</header>
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col items-center justify-center px-4 py-12">
+<!-- Success Notification (Optional State) -->
+<div class="w-full max-w-[480px] mb-6 hidden">
+<div class="bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-200 dark:border-emerald-800 rounded-lg p-4 flex gap-3">
+<span class="material-symbols-outlined text-emerald-600 dark:text-emerald-400">check_circle</span>
+<p class="text-sm text-emerald-800 dark:text-emerald-200">
+                    If an account exists for this email, a reset link has been sent. Please check your inbox.
+                </p>
+</div>
+</div>
+<!-- Forgot Password Card -->
+<div class="w-full max-w-[480px] bg-white dark:bg-[#1a2632] rounded-xl shadow-xl shadow-slate-200/50 dark:shadow-none border border-slate-100 dark:border-slate-800 overflow-hidden">
+<div class="p-8 sm:p-10">
+<!-- Card Header -->
+<div class="text-center mb-8">
+<div class="inline-flex items-center justify-center size-16 bg-primary/10 rounded-full text-primary mb-4">
+<span class="material-symbols-outlined text-3xl">lock_reset</span>
+</div>
+<h1 class="text-[#0d141b] dark:text-white text-2xl font-bold leading-tight">Reset your password</h1>
+<p class="text-slate-500 dark:text-slate-400 text-sm mt-3 leading-relaxed">
+                        Enter the email address associated with your account and we'll send you a link to reset your password.
+                    </p>
+</div>
+<!-- Form -->
+<form class="space-y-6">
+<div>
+<label class="block text-[#0d141b] dark:text-slate-200 text-sm font-semibold mb-2" for="email">
+                            Email Address
+                        </label>
+<div class="relative">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
+<span class="material-symbols-outlined text-xl">mail</span>
+</div>
+<input class="form-input block w-full pl-10 pr-4 py-3 rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 text-[#0d141b] dark:text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-sm" id="email" name="email" placeholder="name@example.com" required="" type="email"/>
+</div>
+</div>
+<button class="w-full flex items-center justify-center gap-2 bg-primary hover:bg-primary/90 text-white font-bold py-3 px-4 rounded-lg transition-all shadow-md shadow-primary/20" type="submit">
+<span>Send Reset Link</span>
+<span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</form>
+<!-- Footer Action -->
+<div class="mt-8 pt-6 border-t border-slate-100 dark:border-slate-800 text-center">
+<a class="inline-flex items-center gap-1 text-sm font-semibold text-primary hover:text-primary/80 transition-colors" href="#">
+<span class="material-symbols-outlined text-sm">arrow_back</span>
+                        Back to Login
+                    </a>
+</div>
+</div>
+</div>
+<!-- Simple Visual Background Elements -->
+<div class="fixed top-0 right-0 -z-10 opacity-10 dark:opacity-5 pointer-events-none">
+<svg fill="none" height="600" viewbox="0 0 600 600" width="600" xmlns="http://www.w3.org/2000/svg">
+<circle cx="400" cy="200" fill="url(#paint0_linear)" r="200"></circle>
+<defs>
+<lineargradient gradientunits="userSpaceOnUse" id="paint0_linear" x1="200" x2="600" y1="0" y2="400">
+<stop stop-color="#137fec"></stop>
+<stop offset="1" stop-color="#137fec" stop-opacity="0"></stop>
+</lineargradient>
+</defs>
+</svg>
+</div>
+<div class="fixed bottom-0 left-0 -z-10 opacity-10 dark:opacity-5 pointer-events-none">
+<svg fill="none" height="600" viewbox="0 0 600 600" width="600" xmlns="http://www.w3.org/2000/svg">
+<circle cx="200" cy="400" fill="url(#paint1_linear)" r="200"></circle>
+<defs>
+<lineargradient gradientunits="userSpaceOnUse" id="paint1_linear" x1="0" x2="400" y1="200" y2="600">
+<stop stop-color="#137fec"></stop>
+<stop offset="1" stop-color="#137fec" stop-opacity="0"></stop>
+</lineargradient>
+</defs>
+</svg>
+</div>
+</main>
+<!-- Simple Footer -->
+<footer class="py-6 text-center text-slate-400 dark:text-slate-600 text-xs">
+        © 2024 TradingJournal Inc. All rights reserved.
+    </footer>
+</body></html>

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Create Trader Account - TradeLog</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#137fec",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined { font-size: 20px; }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 transition-colors duration-200">
+<div class="flex min-h-screen flex-col lg:flex-row">
+<!-- Left Side: Visual Branding/Hero -->
+<div class="relative hidden w-full items-center justify-center bg-primary lg:flex lg:w-1/2 overflow-hidden">
+<div class="absolute inset-0 opacity-20" data-alt="Dark financial candlestick chart with blue lines" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuChUSdjwHYvuuOo19n4vgMPeZoOaRgwDyyfiPyZrNN6Yy8yrkkgN8TZ2Vkt-P-u3s5rjJ3hzVtIACl0PFzxBjtHBX6Yv1LeTiu2dpBF1_fkB9AcnEwAnqufhwkE3HjfP1p-ZU6P9l9qjIPs1bGvi-xdPyloP00lu0jAxzYwdHzmLdFiIsjIXoNwhImyxx7kn2TJ_UwvOGFa0l4WjQOPvWiebsZJDfy0g9pW40y9IayoTwEUxH1mEEJlDWccmrjammLflGSS22j2mMg"); background-size: cover; background-position: center;'></div>
+<div class="absolute inset-0 bg-gradient-to-br from-primary via-primary/80 to-blue-900/90"></div>
+<div class="relative z-10 px-12 text-center text-white">
+<div class="mb-8 inline-flex items-center gap-3">
+<span class="material-symbols-outlined text-4xl">database</span>
+<span class="text-3xl font-black tracking-tighter">TradeLog</span>
+</div>
+<h1 class="mb-6 text-5xl font-black leading-tight tracking-tight">
+                    Log every trade. <br/>Analyze every move.
+                </h1>
+<p class="mx-auto max-w-md text-lg text-blue-100/90 leading-relaxed">
+                    Join thousands of traders tracking their performance on the most advanced journaling platform. Turn data into discipline.
+                </p>
+<div class="mt-12 flex flex-col items-center gap-6">
+<div class="flex -space-x-3">
+<img alt="User" class="h-10 w-10 rounded-full border-2 border-primary bg-slate-200" data-alt="Trader profile picture 1" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAzTd3faproEyjJD1Xzb3Al7HR_LJEJlP_Jv3WSgkB_jDckxrylpzqExFAnHUv8R6AT1xkjkye0x9PTmUhuuv3t8eAfJ9H679KpoSKWkVNo8W3P0o-xthxIpP9r-rrkMFg4xFFDriA03prDVKcnZdw4JQnqLCBGb9iHWifWwpwX5G6IvsVaH0BlEa8oNpfTg0H_lVQf73R3IRUctotRNhbAO9XYIpFUFqHBJTjrXgYYBjcUYibO6BnkcP4AKfLpHXtn7qYGGvVWRmA"/>
+<img alt="User" class="h-10 w-10 rounded-full border-2 border-primary bg-slate-200" data-alt="Trader profile picture 2" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAHU3qKn3xNaQFJAphfaFlR4cYzKiOXBCtvZ4fX7IWY666Z6OsozoQVbqKpZKeaq3nEPHtMhAXJiKueaXTWeH-NykyRYPROpEQnf5yXKpbJq1152M7PusNTnsmujwtIctru380a-gMgPQxpTepFTEZFe7wY7BIWy0g1lhxB8LEtHlgYHkvmZoWIo3ZKzz2E3glVAtONEnyVEWr9yJbnj3_fEx-Z00_gonHMb7oFv5F3j0_EDuhpjwtfG6Db2rDxN4wf8Ze4mjrwn_M"/>
+<img alt="User" class="h-10 w-10 rounded-full border-2 border-primary bg-slate-200" data-alt="Trader profile picture 3" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDRW2jRib8D1EUZrDTtc0pJyUUZyX_95BPTMsIT7npsgULMFZtDhdhsbVaEj2WcC4ZGnGoGyNqtIFhF-CuxnskV0y1_gK6V3t5aHOvf2POVY8HYTWjqWGXssw4S5ecETbY6ORFpkS0jfiO6ltQRMDakKV_Z0XakxovjheooeQ89B5vYItwGA2Y7Tsbz4jP6lA4frb3sCHWF7csF0KmfHgsRc9u8vM6qiDWtxZtXpc-XqdszH5I1zNkpGKQ3yvC6HTYmMUi9DvlrQpk"/>
+<div class="flex h-10 w-10 items-center justify-center rounded-full border-2 border-primary bg-blue-500 text-xs font-bold">+2k</div>
+</div>
+<p class="text-sm font-medium text-blue-100">Trusted by 15,000+ active traders</p>
+</div>
+</div>
+</div>
+<!-- Right Side: Registration Form -->
+<div class="flex w-full flex-col bg-background-light dark:bg-background-dark lg:w-1/2">
+<!-- Mobile Navigation (Logo Only) -->
+<div class="flex items-center justify-between px-6 py-6 lg:hidden">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">database</span>
+<span class="text-xl font-bold tracking-tight">TradeLog</span>
+</div>
+<a class="text-sm font-semibold text-primary" href="#">Log in</a>
+</div>
+<div class="mx-auto flex w-full max-w-[480px] flex-1 flex-col justify-center px-6 py-12 lg:px-12">
+<div class="mb-10 text-left">
+<h2 class="text-3xl font-bold tracking-tight text-slate-900 dark:text-white">Create Your Account</h2>
+<p class="mt-2 text-slate-500 dark:text-slate-400">Start your 14-day free trial today.</p>
+</div>
+<!-- Social Sign-in -->
+<button class="flex w-full items-center justify-center gap-3 rounded-lg border border-slate-200 bg-white px-4 py-3 text-sm font-semibold text-slate-700 transition hover:bg-slate-50 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-slate-700">
+<svg class="h-5 w-5" viewbox="0 0 24 24">
+<path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"></path>
+<path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"></path>
+<path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"></path>
+<path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"></path>
+</svg>
+                    Continue with Google
+                </button>
+<div class="relative my-8">
+<div aria-hidden="true" class="absolute inset-0 flex items-center">
+<div class="w-full border-t border-slate-200 dark:border-slate-800"></div>
+</div>
+<div class="relative flex justify-center text-sm font-medium">
+<span class="bg-background-light px-4 text-slate-500 dark:bg-background-dark dark:text-slate-400">Or register with email</span>
+</div>
+</div>
+<!-- Registration Form -->
+<form action="#" class="space-y-5">
+<!-- Full Name -->
+<div>
+<label class="block text-sm font-semibold text-slate-700 dark:text-slate-300" for="name">Full Name</label>
+<div class="mt-1">
+<input class="block w-full rounded-lg border-slate-200 bg-white px-4 py-3 text-sm focus:border-primary focus:ring-primary dark:border-slate-700 dark:bg-slate-800 dark:text-white" id="name" name="name" placeholder="John Doe" type="text"/>
+</div>
+</div>
+<!-- Email with Error State -->
+<div>
+<label class="block text-sm font-semibold text-slate-700 dark:text-slate-300" for="email">Email Address</label>
+<div class="mt-1 relative">
+<input class="block w-full rounded-lg border-red-500 bg-white px-4 py-3 text-sm focus:border-red-500 focus:ring-red-500 dark:bg-slate-800 dark:text-white" id="email" name="email" placeholder="alex@trader.com" type="email" value="alex@trader.com"/>
+<span class="material-symbols-outlined absolute right-3 top-3 text-red-500">error</span>
+</div>
+<p class="mt-1.5 text-xs font-medium text-red-500">This email is already associated with an account.</p>
+</div>
+<!-- Password with Strength Meter -->
+<div>
+<div class="flex items-center justify-between">
+<label class="block text-sm font-semibold text-slate-700 dark:text-slate-300" for="password">Password</label>
+</div>
+<div class="mt-1 relative">
+<input class="block w-full rounded-lg border-slate-200 bg-white px-4 py-3 text-sm focus:border-primary focus:ring-primary dark:border-slate-700 dark:bg-slate-800 dark:text-white" id="password" name="password" placeholder="••••••••" type="password" value="Trade12"/>
+<button class="absolute right-3 top-3 text-slate-400 hover:text-slate-600" type="button">
+<span class="material-symbols-outlined">visibility</span>
+</button>
+</div>
+<!-- Strength Meter UI -->
+<div class="mt-3">
+<div class="flex gap-1.5 h-1">
+<div class="flex-1 rounded-full bg-yellow-400"></div>
+<div class="flex-1 rounded-full bg-yellow-400"></div>
+<div class="flex-1 rounded-full bg-slate-200 dark:bg-slate-700"></div>
+<div class="flex-1 rounded-full bg-slate-200 dark:bg-slate-700"></div>
+</div>
+<div class="mt-1.5 flex items-center justify-between">
+<p class="text-[11px] font-bold uppercase tracking-wider text-yellow-500">Weak Password</p>
+<p class="text-[11px] text-slate-400">Min. 8 characters</p>
+</div>
+</div>
+</div>
+<!-- Terms of Service -->
+<div class="flex items-start gap-3 py-2">
+<div class="flex h-5 items-center">
+<input class="h-4 w-4 rounded border-slate-300 text-primary focus:ring-primary dark:border-slate-700 dark:bg-slate-800" id="terms" name="terms" type="checkbox"/>
+</div>
+<label class="text-sm leading-relaxed text-slate-600 dark:text-slate-400" for="terms">
+                            I agree to the <a class="font-semibold text-primary hover:underline" href="#">Terms of Service</a> and <a class="font-semibold text-primary hover:underline" href="#">Privacy Policy</a>.
+                        </label>
+</div>
+<!-- Primary Action (Disabled) -->
+<button class="w-full rounded-lg bg-primary py-3.5 text-sm font-bold text-white shadow-lg shadow-primary/20 transition-all hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-primary/50 disabled:cursor-not-allowed disabled:opacity-50" type="submit">
+                        Create Account
+                    </button>
+</form>
+<p class="mt-8 text-center text-sm text-slate-600 dark:text-slate-400">
+                    Already have an account? 
+                    <a class="font-bold text-primary hover:underline" href="#">Log in</a>
+</p>
+</div>
+<!-- Simple Footer -->
+<footer class="mt-auto px-12 py-8 text-center lg:text-left">
+<p class="text-xs text-slate-400">© 2024 TradeLog Inc. All rights reserved. Professional Grade Trading Analytics.</p>
+</footer>
+</div>
+</div>
+</body></html>
