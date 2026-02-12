@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>TradeDiary Analytics</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#137fec",
+                        "background-light": "#f8fafc",
+                        "background-dark": "#0f172a",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+<style type="text/tailwindcss">
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .filled-icon { font-variation-settings: 'FILL' 1; }
+        .heatmap-cell { aspect-ratio: 1/1; }
+        :root {
+            --sidebar-width: 260px;
+            --header-height: 72px;
+        }
+        .modal-blur {
+            filter: blur(8px);
+            pointer-events: none;
+            user-select: none;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display transition-colors duration-200 overflow-hidden">
+<header class="h-[var(--header-height)] w-full bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 sticky top-0 z-50 px-6 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="bg-primary p-2 rounded-lg text-white flex items-center justify-center">
+<span class="material-symbols-outlined text-xl filled-icon">trending_up</span>
+</div>
+<h1 class="font-bold text-xl tracking-tight text-primary">TradeDiary</h1>
+</div>
+<div class="flex items-center gap-6">
+<button class="text-slate-500 dark:text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">dark_mode</span>
+</button>
+<div class="h-8 w-px bg-slate-200 dark:bg-slate-800"></div>
+<div class="flex items-center gap-3">
+<div class="text-right">
+<p class="text-sm font-bold leading-tight">Abhay S.</p>
+<p class="text-[10px] font-medium text-slate-400 uppercase tracking-wider">Standard Account</p>
+</div>
+<div class="h-10 w-10 rounded-full bg-indigo-600 flex items-center justify-center text-white font-bold overflow-hidden">
+<span class="text-sm">AS</span>
+</div>
+</div>
+</div>
+</header>
+<div class="flex h-[calc(100vh-var(--header-height))] overflow-hidden">
+<aside class="w-[var(--sidebar-width)] flex-shrink-0 border-r border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 flex flex-col">
+<nav class="flex-1 px-4 py-6 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-xl group transition-colors" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-sm font-semibold">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 bg-blue-50 dark:bg-blue-900/20 text-primary rounded-xl group transition-colors" href="#">
+<span class="material-symbols-outlined filled-icon">analytics</span>
+<span class="text-sm font-bold">Analytics</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-xl group transition-colors" href="#">
+<span class="material-symbols-outlined">psychology</span>
+<span class="text-sm font-semibold">Psychology</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-xl group transition-colors" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-sm font-semibold">Settings</span>
+</a>
+</nav>
+<div class="p-4 border-t border-slate-100 dark:border-slate-800">
+<div class="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-800 mb-4">
+<p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-3">PRO PLAN</p>
+<div class="mb-3">
+<div class="w-full h-1.5 bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden mb-1.5">
+<div class="bg-primary h-full w-[75%]"></div>
+</div>
+<div class="flex justify-between text-[11px] font-bold text-slate-600 dark:text-slate-400">
+<span>750/1000 monthly trades</span>
+</div>
+</div>
+<button class="w-full py-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl text-xs font-bold text-slate-900 dark:text-white shadow-sm hover:bg-slate-50 transition-all">
+                        Upgrade Now
+                    </button>
+</div>
+<button class="flex items-center gap-3 px-4 py-3 text-slate-500 dark:text-slate-400 hover:text-red-500 transition-colors w-full">
+<span class="material-symbols-outlined">logout</span>
+<span class="text-sm font-semibold">Sign Out</span>
+</button>
+</div>
+</aside>
+<main class="flex-1 overflow-y-auto modal-blur opacity-50">
+<div class="p-8 max-w-7xl mx-auto">
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8">
+<div>
+<h2 class="text-2xl font-bold tracking-tight text-slate-900 dark:text-white">Advanced Analytics</h2>
+<p class="text-sm text-slate-500 dark:text-slate-400 mt-1">Analyze performance across all strategies and timeframes.</p>
+</div>
+<div class="flex gap-3">
+<button class="flex items-center gap-2 px-4 py-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl text-sm font-bold shadow-sm">
+<span class="material-symbols-outlined text-lg">calendar_today</span>
+                            Custom Range
+                        </button>
+<button class="flex items-center gap-2 px-5 py-2 bg-primary text-white rounded-xl text-sm font-bold shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined text-lg">download</span>
+                            Download Report
+                        </button>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+<div class="bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
+<p class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-2">Total Net Profit</p>
+<div class="flex items-end justify-between">
+<h3 class="text-2xl font-black text-slate-900 dark:text-white">+$12,450.00</h3>
+</div>
+</div>
+<div class="bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
+<p class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-2">Profit Factor</p>
+<h3 class="text-2xl font-black text-slate-900 dark:text-white">1.85</h3>
+</div>
+<div class="bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
+<p class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-2">Win Rate</p>
+<h3 class="text-2xl font-black text-slate-900 dark:text-white">64.2%</h3>
+</div>
+<div class="bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
+<p class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-2">Max Drawdown</p>
+<h3 class="text-2xl font-black text-slate-900 dark:text-white">8.4%</h3>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+<div class="lg:col-span-2 bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200 dark:border-slate-800">
+<h4 class="font-bold flex items-center gap-2 mb-8">
+<span class="material-symbols-outlined text-primary">calendar_view_month</span>
+                            Daily P&amp;L Heatmap
+                        </h4>
+<div class="grid grid-cols-[repeat(20,minmax(0,1fr))] gap-2">
+<div class="heatmap-cell bg-emerald-500 rounded-sm"></div><div class="heatmap-cell bg-emerald-200 rounded-sm"></div><div class="heatmap-cell bg-rose-300 rounded-sm"></div><div class="heatmap-cell bg-emerald-400 rounded-sm"></div><div class="heatmap-cell bg-emerald-500 rounded-sm"></div><div class="heatmap-cell bg-slate-100 rounded-sm"></div><div class="heatmap-cell bg-emerald-500 rounded-sm"></div><div class="heatmap-cell bg-emerald-300 rounded-sm"></div><div class="heatmap-cell bg-rose-500 rounded-sm"></div><div class="heatmap-cell bg-emerald-500 rounded-sm"></div>
+<div class="heatmap-cell bg-emerald-200 rounded-sm"></div><div class="heatmap-cell bg-emerald-500 rounded-sm"></div><div class="heatmap-cell bg-emerald-400 rounded-sm"></div><div class="heatmap-cell bg-emerald-500 rounded-sm"></div><div class="heatmap-cell bg-rose-300 rounded-sm"></div><div class="heatmap-cell bg-emerald-500 rounded-sm"></div><div class="heatmap-cell bg-emerald-100 rounded-sm"></div><div class="heatmap-cell bg-emerald-500 rounded-sm"></div><div class="heatmap-cell bg-emerald-500 rounded-sm"></div><div class="heatmap-cell bg-slate-100 rounded-sm"></div>
+</div>
+</div>
+<div class="bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200 dark:border-slate-800">
+<h4 class="font-bold flex items-center gap-2 mb-8">
+<span class="material-symbols-outlined text-primary">pie_chart</span>
+                            Win/Loss Distribution
+                        </h4>
+<div class="h-40 flex items-center justify-center">
+<div class="w-32 h-32 rounded-full border-[12px] border-emerald-500 border-r-rose-500 border-b-rose-500 flex items-center justify-center">
+<span class="font-black text-xl">64%</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+<div class="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-sm">
+<div class="bg-white dark:bg-slate-900 w-full max-w-4xl max-h-[90vh] rounded-2xl shadow-2xl overflow-hidden flex flex-col border border-slate-200 dark:border-slate-800">
+<div class="px-6 py-4 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary filled-icon">analytics</span>
+<h3 class="font-bold text-lg text-slate-900 dark:text-white">Trade Entry with Risk Analytics</h3>
+</div>
+<button class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<div class="flex-1 overflow-y-auto p-6">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<div class="space-y-6">
+<div class="grid grid-cols-2 gap-4">
+<div>
+<label class="block text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1.5">Symbol</label>
+<input class="w-full bg-slate-50 dark:bg-slate-800 border-slate-100 dark:border-slate-700 rounded-xl px-4 py-2.5 text-sm font-semibold focus:ring-primary focus:border-primary" type="text" value="BTCUSDT"/>
+</div>
+<div>
+<label class="block text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1.5">Side</label>
+<div class="flex p-1 bg-slate-100 dark:bg-slate-800 rounded-xl">
+<button class="flex-1 py-1.5 text-sm font-bold bg-white dark:bg-slate-700 rounded-lg text-primary shadow-sm">LONG</button>
+<button class="flex-1 py-1.5 text-sm font-bold text-slate-500">SHORT</button>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div>
+<label class="block text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1.5">Setup / Strategy</label>
+<select class="w-full bg-slate-50 dark:bg-slate-800 border-slate-100 dark:border-slate-700 rounded-xl px-4 py-2.5 text-sm font-semibold">
+<option>Breakout Retest</option>
+<option>Trend Following</option>
+</select>
+</div>
+<div>
+<label class="block text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1.5">Position Size (Units)</label>
+<input class="w-full bg-slate-50 dark:bg-slate-800 border-slate-100 dark:border-slate-700 rounded-xl px-4 py-2.5 text-sm font-semibold" type="number" value="0.5"/>
+</div>
+</div>
+<div class="grid grid-cols-3 gap-4">
+<div>
+<label class="block text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1.5">Entry Price</label>
+<div class="relative">
+<span class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xs">$</span>
+<input class="w-full bg-slate-50 dark:bg-slate-800 border-slate-100 dark:border-slate-700 rounded-xl pl-6 pr-4 py-2.5 text-sm font-semibold" type="text" value="42500"/>
+</div>
+</div>
+<div>
+<label class="block text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1.5">Stop Loss</label>
+<div class="relative">
+<span class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xs">$</span>
+<input class="w-full bg-rose-50/50 dark:bg-rose-900/10 border-rose-100 dark:border-rose-900/30 rounded-xl pl-6 pr-4 py-2.5 text-sm font-semibold text-rose-600" type="text" value="41800"/>
+</div>
+</div>
+<div>
+<label class="block text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1.5">Exit Price (Target)</label>
+<div class="relative">
+<span class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xs">$</span>
+<input class="w-full bg-emerald-50/50 dark:bg-emerald-900/10 border-emerald-100 dark:border-emerald-900/30 rounded-xl pl-6 pr-4 py-2.5 text-sm font-semibold text-emerald-600" type="text" value="44250"/>
+</div>
+</div>
+</div>
+<div>
+<label class="block text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1.5">Fees</label>
+<div class="relative max-w-[200px]">
+<span class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xs">$</span>
+<input class="w-full bg-slate-50 dark:bg-slate-800 border-slate-100 dark:border-slate-700 rounded-xl pl-6 pr-4 py-2.5 text-sm font-semibold" type="text" value="12.50"/>
+</div>
+</div>
+</div>
+<div class="space-y-6">
+<div class="bg-slate-50 dark:bg-slate-800/50 rounded-2xl p-6 border border-slate-100 dark:border-slate-800">
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-primary text-lg">bar_chart</span>
+<h4 class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Trade Analytics</h4>
+</div>
+<div class="space-y-4">
+<div class="flex justify-between items-center">
+<span class="text-xs font-semibold text-slate-500">Potential P/L</span>
+<span class="text-sm font-black text-emerald-500">+$875.00 <span class="text-[10px] ml-1 px-1.5 py-0.5 bg-emerald-100 dark:bg-emerald-500/10 rounded">+2.06%</span></span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-xs font-semibold text-slate-500">Risk/Reward</span>
+<span class="text-sm font-black text-primary">1:2.5</span>
+</div>
+<div class="space-y-1.5">
+<div class="flex justify-between items-center">
+<span class="text-xs font-semibold text-slate-500">Fee Impact</span>
+<span class="text-[11px] font-bold text-slate-700 dark:text-slate-300">1.43% <span class="text-slate-400 font-medium italic">of profit</span></span>
+</div>
+<div class="w-full h-1 bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
+<div class="bg-orange-400 h-full w-[15%]"></div>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-slate-50 dark:bg-slate-800/50 rounded-2xl p-6 border border-slate-100 dark:border-slate-800">
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-primary text-lg">face</span>
+<h4 class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Psychology / Mood</h4>
+</div>
+<div class="flex justify-between items-center gap-2">
+<div class="flex flex-col items-center gap-2 group cursor-pointer">
+<div class="w-12 h-12 rounded-full border border-slate-200 dark:border-slate-700 flex items-center justify-center text-slate-400 group-hover:bg-white group-hover:text-primary transition-all">
+<span class="material-symbols-outlined">eco</span>
+</div>
+<span class="text-[10px] font-bold text-slate-400">Calm</span>
+</div>
+<div class="flex flex-col items-center gap-2 group cursor-pointer">
+<div class="w-12 h-12 rounded-full border border-slate-200 dark:border-slate-700 flex items-center justify-center text-slate-400 group-hover:bg-white group-hover:text-primary transition-all">
+<span class="material-symbols-outlined">bolt</span>
+</div>
+<span class="text-[10px] font-bold text-slate-400">Anxious</span>
+</div>
+<div class="flex flex-col items-center gap-2 group cursor-pointer">
+<div class="w-12 h-12 rounded-full bg-blue-50 dark:bg-blue-900/30 border-2 border-primary flex items-center justify-center text-primary shadow-sm">
+<span class="material-symbols-outlined filled-icon">psychology</span>
+</div>
+<span class="text-[10px] font-bold text-primary">Confident</span>
+</div>
+<div class="flex flex-col items-center gap-2 group cursor-pointer">
+<div class="w-12 h-12 rounded-full border border-slate-200 dark:border-slate-700 flex items-center justify-center text-slate-400 group-hover:bg-white group-hover:text-primary transition-all">
+<span class="material-symbols-outlined">monetization_on</span>
+</div>
+<span class="text-[10px] font-bold text-slate-400">Greedy</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-8 space-y-6">
+<div>
+<label class="block text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1.5">Market Conditions / Tags</label>
+<div class="w-full bg-slate-50 dark:bg-slate-800 border border-slate-100 dark:border-slate-700 rounded-xl p-3 min-h-[80px]">
+<div class="flex flex-wrap gap-2 mb-2">
+<span class="bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 px-2 py-1 rounded-lg text-xs font-bold flex items-center gap-1">
+                                    Trending Up <span class="material-symbols-outlined text-xs cursor-pointer">close</span>
+</span>
+<span class="bg-slate-200 dark:bg-slate-700 text-slate-600 dark:text-slate-300 px-2 py-1 rounded-lg text-xs font-bold flex items-center gap-1">
+                                    High Volatility <span class="material-symbols-outlined text-xs cursor-pointer">close</span>
+</span>
+</div>
+<input class="bg-transparent border-none p-0 text-sm focus:ring-0 w-full placeholder:text-slate-400" placeholder="Add market tag (e.g. FOMC, Earnings, Overbought)..." type="text"/>
+</div>
+</div>
+<div>
+<label class="block text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1.5">Notes</label>
+<textarea class="w-full bg-slate-50 dark:bg-slate-800 border-slate-100 dark:border-slate-700 rounded-xl px-4 py-3 text-sm font-medium focus:ring-primary focus:border-primary" placeholder="Write down your thoughts about this trade entry..." rows="3"></textarea>
+</div>
+</div>
+</div>
+<div class="px-6 py-4 border-t border-slate-100 dark:border-slate-800 flex justify-end items-center gap-4 bg-slate-50/50 dark:bg-slate-800/30">
+<button class="text-sm font-bold text-slate-500 hover:text-slate-700 dark:hover:text-slate-300">Cancel</button>
+<button class="px-8 py-2.5 bg-primary text-white font-bold rounded-xl shadow-lg shadow-primary/20 hover:bg-primary/90 transition-all">Log Trade</button>
+</div>
+</div>
+</div>
+
+</body></html>

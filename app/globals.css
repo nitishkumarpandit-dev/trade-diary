@@ -3,9 +3,11 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-  --color-primary: #2563eb;
+  --color-primary: #3b82f6;
   --color-background-light: #f8fafc;
   --color-background-dark: #0f172a;
+  --color-card-light: #ffffff;
+  --color-card-dark: #1e293b;
 
   --font-display: Inter, sans-serif;
 

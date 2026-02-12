@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>TradeDiary | Strategies Overview</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,typography,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#3b82f6",
+                        "background-light": "#f8fafc",
+                        "background-dark": "#0f172a",
+                        "card-light": "#ffffff",
+                        "card-dark": "#1e293b",
+                    },
+                    fontFamily: {
+                        display: ["Inter", "sans-serif"],
+                    },
+                    borderRadius: {
+                        DEFAULT: "0.75rem",
+                    },
+                },
+            },
+        };
+    </script>
+<style type="text/tailwindcss">
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 10px;
+        }
+        .dark .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #334155;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .sparkline-container svg {
+            filter: drop-shadow(0px 2px 2px rgba(59, 130, 246, 0.1));
+        }#create-strategy-modal {
+            display: flex;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen">
+<div class="fixed inset-0 z-[100] items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm" id="create-strategy-modal">
+<div class="bg-card-light dark:bg-card-dark w-full max-w-3xl rounded-3xl shadow-2xl border border-slate-200 dark:border-slate-800 overflow-hidden flex flex-col max-h-[90vh]">
+<div class="px-8 py-6 border-b border-slate-100 dark:border-slate-800 flex justify-between items-center bg-white dark:bg-card-dark sticky top-0 z-10">
+<div>
+<h2 class="text-xl font-bold tracking-tight">Create New Strategy</h2>
+<p class="text-sm text-slate-500 mt-1">Define the parameters and rules for your trading system</p>
+</div>
+<button class="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full text-slate-400 transition-colors" onclick="document.getElementById('create-strategy-modal').style.display='none'">
+<span class="material-icons-round">close</span>
+</button>
+</div>
+<div class="px-8 py-6 overflow-y-auto custom-scrollbar">
+<form class="space-y-8">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<div class="space-y-5">
+<h3 class="text-xs font-bold uppercase tracking-widest text-primary">Basics</h3>
+<div class="space-y-4">
+<div>
+<label class="block text-sm font-semibold mb-1.5 text-slate-700 dark:text-slate-300">Strategy Name</label>
+<input class="w-full bg-slate-50 dark:bg-slate-800/50 border-slate-200 dark:border-slate-700 rounded-xl px-4 py-2.5 text-sm focus:ring-primary focus:border-primary" placeholder="e.g. Morning Gap Breakout" type="text"/>
+</div>
+<div>
+<label class="block text-sm font-semibold mb-1.5 text-slate-700 dark:text-slate-300">Primary Asset Class</label>
+<select class="w-full bg-slate-50 dark:bg-slate-800/50 border-slate-200 dark:border-slate-700 rounded-xl px-4 py-2.5 text-sm focus:ring-primary focus:border-primary">
+<option>Equity</option>
+<option>Crypto</option>
+<option>Forex</option>
+<option>Options</option>
+</select>
+</div>
+<div class="flex items-center justify-between p-3.5 bg-slate-50 dark:bg-slate-800/50 rounded-xl border border-slate-100 dark:border-slate-700/50">
+<div>
+<p class="text-sm font-semibold">Status</p>
+<p class="text-[10px] text-slate-500 uppercase font-bold tracking-tighter">Toggle between Active/Paused</p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer dark:bg-slate-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-primary"></div>
+</label>
+</div>
+</div>
+</div>
+<div class="space-y-5">
+<h3 class="text-xs font-bold uppercase tracking-widest text-primary">Performance Parameters</h3>
+<div class="space-y-4">
+<div class="grid grid-cols-2 gap-4">
+<div>
+<label class="block text-sm font-semibold mb-1.5 text-slate-700 dark:text-slate-300">Target Win Rate %</label>
+<input class="w-full bg-slate-50 dark:bg-slate-800/50 border-slate-200 dark:border-slate-700 rounded-xl px-4 py-2.5 text-sm focus:ring-primary focus:border-primary" placeholder="60" type="number"/>
+</div>
+<div>
+<label class="block text-sm font-semibold mb-1.5 text-slate-700 dark:text-slate-300">Min R:R Ratio</label>
+<input class="w-full bg-slate-50 dark:bg-slate-800/50 border-slate-200 dark:border-slate-700 rounded-xl px-4 py-2.5 text-sm focus:ring-primary focus:border-primary" placeholder="1:2" type="text"/>
+</div>
+</div>
+<div>
+<label class="block text-sm font-semibold mb-1.5 text-slate-700 dark:text-slate-300">Description</label>
+<textarea class="w-full bg-slate-50 dark:bg-slate-800/50 border-slate-200 dark:border-slate-700 rounded-xl px-4 py-2.5 text-sm focus:ring-primary focus:border-primary" placeholder="Brief overview of the strategy logic..." rows="3"></textarea>
+</div>
+</div>
+</div>
+</div>
+<div class="space-y-4">
+<h3 class="text-xs font-bold uppercase tracking-widest text-primary">Specific Rules</h3>
+<div class="space-y-4">
+<div>
+<label class="block text-sm font-semibold mb-1.5 text-slate-700 dark:text-slate-300">Entry &amp; Exit Conditions</label>
+<textarea class="w-full bg-slate-50 dark:bg-slate-800/50 border-slate-200 dark:border-slate-700 rounded-xl px-4 py-2.5 text-sm focus:ring-primary focus:border-primary font-mono" placeholder="• Entry: RSI &lt; 30 on 15m TF
+• Exit: Fixed 2:1 TP or MA Crossover
+• Risk: Max 1% per trade" rows="5"></textarea>
+<p class="text-[11px] text-slate-400 mt-2 flex items-center gap-1">
+<span class="material-icons-round text-xs">info</span>
+                                Detailed rules help you stay disciplined during live market hours.
+                            </p>
+</div>
+</div>
+</div>
+</form>
+</div>
+<div class="px-8 py-6 border-t border-slate-100 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/30 flex justify-end gap-3 sticky bottom-0">
+<button class="px-6 py-2.5 text-sm font-semibold text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl transition-all" onclick="document.getElementById('create-strategy-modal').style.display='none'">
+                Cancel
+            </button>
+<button class="px-8 py-2.5 bg-primary text-white hover:bg-blue-600 rounded-xl text-sm font-bold transition-all shadow-lg shadow-blue-500/20">
+                Create Strategy
+            </button>
+</div>
+</div>
+</div>
+<header class="h-16 border-b border-slate-200 dark:border-slate-800 bg-card-light dark:bg-card-dark flex items-center justify-between px-6 sticky top-0 z-[60]">
+<div class="flex items-center">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
+<span class="material-icons-round text-white text-xl">insights</span>
+</div>
+<span class="text-xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-primary to-blue-600">TradeDiary</span>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full transition-colors" onclick="document.documentElement.classList.toggle('dark')">
+<span class="material-icons-round dark:hidden">dark_mode</span>
+<span class="material-icons-round hidden dark:block">light_mode</span>
+</button>
+<div class="h-8 w-px bg-slate-200 dark:bg-slate-800 mx-1"></div>
+<div class="flex items-center gap-3 pl-2 group cursor-pointer">
+<div class="text-right hidden sm:block">
+<p class="text-sm font-semibold">Abhay S.</p>
+<p class="text-xs text-slate-500">Standard Account</p>
+</div>
+<div class="relative">
+<div class="w-9 h-9 rounded-full bg-gradient-to-tr from-primary to-purple-500 flex items-center justify-center text-white font-bold text-sm">
+                        AS
+                    </div>
+<div class="absolute -bottom-1 -right-1 w-4 h-4 bg-card-light dark:bg-card-dark rounded-full flex items-center justify-center border border-slate-200 dark:border-slate-800">
+<span class="material-icons-round text-[10px]">expand_more</span>
+</div>
+</div>
+</div>
+</div>
+</header>
+<div class="flex">
+<aside class="w-64 border-r border-slate-200 dark:border-slate-800 bg-card-light dark:bg-card-dark flex flex-col fixed top-16 bottom-0 z-50 overflow-y-auto">
+<nav class="flex-1 px-4 space-y-1 mt-6">
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-xl transition-all" href="#">
+<span class="material-icons-round text-[22px]">dashboard</span>
+                    Dashboard
+                </a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-xl transition-all" href="#">
+<span class="material-icons-round text-[22px]">list_alt</span>
+                    Trades
+                </a>
+<a class="flex items-center gap-3 px-4 py-3 text-primary bg-blue-50 dark:bg-blue-900/20 rounded-xl font-medium" href="#">
+<span class="material-icons-round text-[22px]">auto_graph</span>
+                    Strategies
+                </a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-xl transition-all" href="#">
+<span class="material-icons-round text-[22px]">analytics</span>
+                    Analytics
+                </a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-xl transition-all" href="#">
+<span class="material-icons-round text-[22px]">psychology</span>
+                    Psychology
+                </a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-xl transition-all" href="#">
+<span class="material-icons-round text-[22px]">settings</span>
+                    Settings
+                </a>
+</nav>
+<div class="p-4 mt-auto space-y-4">
+<div class="bg-slate-50 dark:bg-slate-800/50 p-4 rounded-2xl border border-slate-100 dark:border-slate-800">
+<p class="text-xs font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-2">Pro Plan</p>
+<div class="w-full bg-slate-200 dark:bg-slate-700 h-1.5 rounded-full mb-3">
+<div class="bg-primary h-1.5 rounded-full w-3/4"></div>
+</div>
+<p class="text-xs text-slate-600 dark:text-slate-400 mb-3">750/1000 monthly trades</p>
+<button class="w-full py-2 bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 rounded-lg text-xs font-semibold hover:shadow-sm transition-all">Upgrade Now</button>
+</div>
+<div class="pt-2 border-t border-slate-100 dark:border-slate-800">
+<button class="flex items-center gap-3 px-4 py-3 w-full text-slate-600 dark:text-slate-400 hover:text-red-500 dark:hover:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/10 rounded-xl transition-all">
+<span class="material-icons-round text-[22px]">logout</span>
+<span class="font-medium">Sign Out</span>
+</button>
+</div>
+</div>
+</aside>
+<main class="flex-1 ml-64 min-h-screen">
+<div class="p-8 space-y-8 custom-scrollbar">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+<div>
+<h1 class="text-2xl font-bold tracking-tight">My Strategies</h1>
+<p class="text-slate-500 dark:text-slate-400 text-sm mt-1">Manage, compare, and analyze your individual trading systems</p>
+</div>
+<button class="flex items-center gap-2 px-5 py-2.5 bg-primary text-white hover:bg-blue-600 rounded-xl text-sm font-semibold transition-all shadow-lg shadow-blue-500/20" onclick="document.getElementById('create-strategy-modal').style.display='flex'">
+<span class="material-icons-round text-lg">add</span>
+<span>Create New Strategy</span>
+</button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<div class="bg-card-light dark:bg-card-dark p-6 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm hover:border-primary/30 transition-all group">
+<div class="flex justify-between items-start mb-6">
+<div>
+<h3 class="font-bold text-lg group-hover:text-primary transition-colors">Mean Reversion</h3>
+<p class="text-xs text-slate-500 mt-0.5">Updated 2 days ago</p>
+</div>
+<span class="px-2 py-1 bg-green-100 dark:bg-green-900/30 text-green-600 text-[10px] font-bold rounded uppercase tracking-wider">Active</span>
+</div>
+<div class="grid grid-cols-3 gap-4 mb-6">
+<div>
+<p class="text-[10px] uppercase font-bold text-slate-400 tracking-wider">Trades</p>
+<p class="text-base font-bold">142</p>
+</div>
+<div>
+<p class="text-[10px] uppercase font-bold text-slate-400 tracking-wider">Win Rate</p>
+<p class="text-base font-bold text-green-600">62%</p>
+</div>
+<div>
+<p class="text-[10px] uppercase font-bold text-slate-400 tracking-wider">Profit F.</p>
+<p class="text-base font-bold">1.85</p>
+</div>
+</div>
+<div class="h-16 w-full sparkline-container">
+<svg class="w-full h-full" preserveAspectRatio="none" viewBox="0 0 100 40">
+<path d="M0 35 L10 32 L20 36 L30 25 L40 28 L50 15 L60 18 L70 5 L80 12 L90 8 L100 2" fill="none" stroke="#3b82f6" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+</div>
+<div class="bg-card-light dark:bg-card-dark p-6 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm hover:border-primary/30 transition-all group">
+<div class="flex justify-between items-start mb-6">
+<div>
+<h3 class="font-bold text-lg group-hover:text-primary transition-colors">Trend Breakout</h3>
+<p class="text-xs text-slate-500 mt-0.5">Updated 5 days ago</p>
+</div>
+<span class="px-2 py-1 bg-green-100 dark:bg-green-900/30 text-green-600 text-[10px] font-bold rounded uppercase tracking-wider">Active</span>
+</div>
+<div class="grid grid-cols-3 gap-4 mb-6">
+<div>
+<p class="text-[10px] uppercase font-bold text-slate-400 tracking-wider">Trades</p>
+<p class="text-base font-bold">85</p>
+</div>
+<div>
+<p class="text-[10px] uppercase font-bold text-slate-400 tracking-wider">Win Rate</p>
+<p class="text-base font-bold text-green-600">48%</p>
+</div>
+<div>
+<p class="text-[10px] uppercase font-bold text-slate-400 tracking-wider">Profit F.</p>
+<p class="text-base font-bold">2.42</p>
+</div>
+</div>
+<div class="h-16 w-full sparkline-container">
+<svg class="w-full h-full" preserveAspectRatio="none" viewBox="0 0 100 40">
+<path d="M0 38 L10 30 L20 35 L30 20 L40 25 L50 10 L60 15 L70 20 L80 5 L90 8 L100 5" fill="none" stroke="#3b82f6" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+</div>
+<div class="bg-card-light dark:bg-card-dark p-6 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm hover:border-primary/30 transition-all group">
+<div class="flex justify-between items-start mb-6">
+<div>
+<h3 class="font-bold text-lg group-hover:text-primary transition-colors">Intraday Scalping</h3>
+<p class="text-xs text-slate-500 mt-0.5">Updated 1 day ago</p>
+</div>
+<span class="px-2 py-1 bg-slate-100 dark:bg-slate-800 text-slate-500 text-[10px] font-bold rounded uppercase tracking-wider">Paused</span>
+</div>
+<div class="grid grid-cols-3 gap-4 mb-6">
+<div>
+<p class="text-[10px] uppercase font-bold text-slate-400 tracking-wider">Trades</p>
+<p class="text-base font-bold">412</p>
+</div>
+<div>
+<p class="text-[10px] uppercase font-bold text-slate-400 tracking-wider">Win Rate</p>
+<p class="text-base font-bold text-green-600">71%</p>
+</div>
+<div>
+<p class="text-[10px] uppercase font-bold text-slate-400 tracking-wider">Profit F.</p>
+<p class="text-base font-bold">1.45</p>
+</div>
+</div>
+<div class="h-16 w-full sparkline-container">
+<svg class="w-full h-full" preserveAspectRatio="none" viewBox="0 0 100 40">
+<path d="M0 20 L10 18 L20 22 L30 15 L40 12 L50 25 L60 22 L70 30 L80 25 L90 28 L100 35" fill="none" stroke="#94a3b8" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+</div>
+</div>
+<div class="bg-card-light dark:bg-card-dark rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden mb-8">
+<div class="p-6 border-b border-slate-100 dark:border-slate-800 flex justify-between items-center">
+<h2 class="text-lg font-bold">Strategy Comparison</h2>
+<div class="flex gap-2">
+<button class="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg text-slate-500"><span class="material-icons-round">filter_list</span></button>
+<button class="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg text-slate-500"><span class="material-icons-round">file_download</span></button>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead class="bg-slate-50 dark:bg-slate-800/50 text-slate-500 dark:text-slate-400 text-xs uppercase font-semibold">
+<tr>
+<th class="px-6 py-4">Strategy Name</th>
+<th class="px-6 py-4">Total P/L</th>
+<th class="px-6 py-4">Avg RR</th>
+<th class="px-6 py-4">Max Drawdown</th>
+<th class="px-6 py-4">Expectancy</th>
+<th class="px-6 py-4">Avg Trade Time</th>
+<th class="px-6 py-4 text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-100 dark:divide-slate-800 text-sm">
+<tr class="hover:bg-slate-50/50 dark:hover:bg-slate-800/30 transition-colors">
+<td class="px-6 py-4">
+<div class="font-semibold">Mean Reversion</div>
+<div class="text-[10px] text-slate-400">Equity Indices</div>
+</td>
+<td class="px-6 py-4 font-semibold text-green-600">₹82,450</td>
+<td class="px-6 py-4">1:1.5</td>
+<td class="px-6 py-4 text-red-500">-3.2%</td>
+<td class="px-6 py-4 font-medium text-slate-700 dark:text-slate-300">₹580 / trade</td>
+<td class="px-6 py-4">45m</td>
+<td class="px-6 py-4 text-right">
+<button class="text-slate-400 hover:text-primary"><span class="material-icons-round text-lg">more_vert</span></button>
+</td>
+</tr>
+<tr class="hover:bg-slate-50/50 dark:hover:bg-slate-800/30 transition-colors">
+<td class="px-6 py-4">
+<div class="font-semibold">Trend Breakout</div>
+<div class="text-[10px] text-slate-400">Momentum Stocks</div>
+</td>
+<td class="px-6 py-4 font-semibold text-green-600">₹1,24,900</td>
+<td class="px-6 py-4">1:3.2</td>
+<td class="px-6 py-4 text-red-500">-5.8%</td>
+<td class="px-6 py-4 font-medium text-slate-700 dark:text-slate-300">₹1,470 / trade</td>
+<td class="px-6 py-4">4h 20m</td>
+<td class="px-6 py-4 text-right">
+<button class="text-slate-400 hover:text-primary"><span class="material-icons-round text-lg">more_vert</span></button>
+</td>
+</tr>
+<tr class="hover:bg-slate-50/50 dark:hover:bg-slate-800/30 transition-colors">
+<td class="px-6 py-4">
+<div class="font-semibold">Intraday Scalping</div>
+<div class="text-[10px] text-slate-400">Nifty Options</div>
+</td>
+<td class="px-6 py-4 font-semibold text-red-600">-₹12,400</td>
+<td class="px-6 py-4">1:0.8</td>
+<td class="px-6 py-4 text-red-500">-12.4%</td>
+<td class="px-6 py-4 font-medium text-slate-700 dark:text-slate-300">-₹30 / trade</td>
+<td class="px-6 py-4">3m</td>
+<td class="px-6 py-4 text-right">
+<button class="text-slate-400 hover:text-primary"><span class="material-icons-round text-lg">more_vert</span></button>
+</td>
+</tr>
+<tr class="hover:bg-slate-50/50 dark:hover:bg-slate-800/30 transition-colors">
+<td class="px-6 py-4">
+<div class="font-semibold">VCP Setup</div>
+<div class="text-[10px] text-slate-400">Weekly Swing</div>
+</td>
+<td class="px-6 py-4 font-semibold text-slate-400">New</td>
+<td class="px-6 py-4">--</td>
+<td class="px-6 py-4">0%</td>
+<td class="px-6 py-4 font-medium text-slate-700 dark:text-slate-300">--</td>
+<td class="px-6 py-4">--</td>
+<td class="px-6 py-4 text-right">
+<button class="text-slate-400 hover:text-primary"><span class="material-icons-round text-lg">more_vert</span></button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</main>
+</div>
+<button class="fixed bottom-8 right-8 w-14 h-14 bg-primary text-white rounded-full shadow-xl hover:scale-110 active:scale-95 transition-all flex items-center justify-center z-[70]" onclick="document.getElementById('create-strategy-modal').style.display='flex'">
+<span class="material-icons-round text-3xl">add</span>
+</button>
+
+</body></html>

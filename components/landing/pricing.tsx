@@ -16,75 +16,46 @@ export function Pricing() {
       </div>
       <div className="max-w-4xl mx-auto grid md:grid-cols-2 gap-8">
         <div className="bg-white dark:bg-slate-800 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700 relative overflow-hidden">
-          <div className="mb-8">
-            <h3 className="text-xl font-bold mb-2">Monthly Plan</h3>
-            <p className="text-sm text-slate-500">
-              Flexibility with month-to-month access
-            </p>
-          </div>
-          <div className="flex items-baseline gap-1 mb-8">
-            <span className="text-4xl font-extrabold">₹299</span>
-            <span className="text-slate-500">/month</span>
+          <div className="mb-4">
+            <h3 className="text-xl font-bold">Standard Plan</h3>
+            <p className="text-sm text-slate-500">Perfect for getting started</p>
           </div>
           <ul className="space-y-4 mb-10">
             <li className="flex items-center gap-3 text-sm text-slate-700 dark:text-slate-300">
-              <CheckCircle className="text-emerald-500 w-5 h-5" /> Unlimited
-              trades
+              <CheckCircle className="text-emerald-500 w-5 h-5" /> 100 trade entries/month
             </li>
             <li className="flex items-center gap-3 text-sm text-slate-700 dark:text-slate-300">
-              <CheckCircle className="text-emerald-500 w-5 h-5" /> Advanced
-              analytics
+              <CheckCircle className="text-emerald-500 w-5 h-5" /> Basic analytics
             </li>
             <li className="flex items-center gap-3 text-sm text-slate-700 dark:text-slate-300">
-              <CheckCircle className="text-emerald-500 w-5 h-5" /> Risk
-              management tools
+              <CheckCircle className="text-emerald-500 w-5 h-5" /> Default features
+            </li>
+          </ul>
+          <button className="w-full py-4 px-6 rounded-xl font-bold bg-slate-100 dark:bg-slate-700 text-slate-900 dark:text-white hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">
+            Start Free
+          </button>
+        </div>
+        <div className="bg-white dark:bg-slate-800 p-8 rounded-[2rem] border-2 border-primary relative overflow-hidden shadow-2xl md:scale-105">
+          <div className="absolute top-4 right-4 bg-primary text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-widest">
+            Popular
+          </div>
+          <div className="mb-4">
+            <h3 className="text-xl font-bold">Pro Plan</h3>
+            <p className="text-sm text-slate-500">For power traders</p>
+          </div>
+          <ul className="space-y-4 mb-10">
+            <li className="flex items-center gap-3 text-sm text-slate-700 dark:text-slate-300">
+              <CheckCircle className="text-emerald-500 w-5 h-5" /> Unlimited trade entries/month
             </li>
             <li className="flex items-center gap-3 text-sm text-slate-700 dark:text-slate-300">
-              <CheckCircle className="text-emerald-500 w-5 h-5" /> Trade
-              screenshots
+              <CheckCircle className="text-emerald-500 w-5 h-5" /> Advanced analytics
+            </li>
+            <li className="flex items-center gap-3 text-sm text-slate-700 dark:text-slate-300">
+              <CheckCircle className="text-emerald-500 w-5 h-5" /> Priority features
             </li>
           </ul>
           <button className="w-full py-4 px-6 rounded-xl font-bold bg-primary text-white hover:opacity-90 transition-opacity">
-            Choose Monthly
-          </button>
-        </div>
-        <div className="bg-white dark:bg-slate-800 p-8 rounded-[2rem] border-2 border-emerald-500 relative overflow-hidden shadow-2xl md:scale-105">
-          <div className="absolute top-4 right-4 bg-emerald-500 text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-widest">
-            Limited Period Offer
-          </div>
-          <div className="mb-8">
-            <h3 className="text-xl font-bold mb-2">Annual Plan</h3>
-            <p className="text-sm text-slate-500">
-              Best value with significant savings
-            </p>
-          </div>
-          <div className="flex items-baseline gap-1 mb-2">
-            <span className="text-4xl font-extrabold">₹999</span>
-            <span className="text-slate-500">/year</span>
-          </div>
-          <p className="text-emerald-500 text-xs font-bold mb-8 italic">
-            (Just ₹83/month)
-          </p>
-          <ul className="space-y-4 mb-10">
-            <li className="flex items-center gap-3 text-sm text-slate-700 dark:text-slate-300 font-medium">
-              <CheckCircle className="text-emerald-500 w-5 h-5" /> Everything in
-              Monthly +
-            </li>
-            <li className="flex items-center gap-3 text-sm text-slate-700 dark:text-slate-300">
-              <CheckCircle className="text-emerald-500 w-5 h-5" /> Priority
-              Support
-            </li>
-            <li className="flex items-center gap-3 text-sm text-slate-700 dark:text-slate-300">
-              <CheckCircle className="text-emerald-500 w-5 h-5" /> Beta Features
-              Access
-            </li>
-            <li className="flex items-center gap-3 text-sm text-slate-700 dark:text-slate-300">
-              <CheckCircle className="text-emerald-500 w-5 h-5" /> Trading
-              Strategy Library
-            </li>
-          </ul>
-          <button className="w-full py-4 px-6 rounded-xl font-bold bg-emerald-500 text-white hover:opacity-90 transition-opacity">
-            Save 72% Annually
+            Upgrade to Pro
           </button>
         </div>
       </div>

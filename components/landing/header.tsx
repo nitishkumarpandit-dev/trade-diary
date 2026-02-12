@@ -3,9 +3,14 @@
 import * as React from "react";
 import Link from "next/link";
 import { useTheme } from "next-themes";
-import { LineChart, Moon, Sun, Menu, X } from "lucide-react";
+import { LineChart, Moon, Sun, Menu, X, LayoutDashboard } from "lucide-react";
+import { User } from "next-auth";
 
-export function Header() {
+interface HeaderProps {
+  user?: User;
+}
+
+export function Header({ user }: HeaderProps) {
   const { theme, setTheme } = useTheme();
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 
@@ -56,18 +61,30 @@ export function Header() {
             <Sun className="w-5 h-5 hidden dark:block" />
             <Moon className="w-5 h-5 block dark:hidden" />
           </button>
-          <Link
-            href="/login"
-            className="hidden sm:block text-sm font-semibold hover:text-primary"
-          >
-            Login
-          </Link>
-          <Link
-            href="/signup"
-            className="bg-primary text-white px-5 py-2 rounded-full text-sm font-semibold hover:bg-blue-700 transition-all shadow-lg shadow-primary/20"
-          >
-            Get Started
-          </Link>
+          {user ? (
+            <Link
+              href="/dashboard"
+              className="hidden sm:flex items-center gap-2 bg-primary text-white px-5 py-2 rounded-full text-sm font-semibold hover:bg-blue-700 transition-all shadow-lg shadow-primary/20"
+            >
+              <LayoutDashboard className="w-4 h-4" />
+              Dashboard
+            </Link>
+          ) : (
+            <>
+              <Link
+                href="/login"
+                className="hidden sm:block text-sm font-semibold hover:text-primary"
+              >
+                Login
+              </Link>
+              <Link
+                href="/register"
+                className="bg-primary hidden sm:block text-white px-5 py-2 rounded-full text-sm font-semibold hover:bg-blue-700 transition-all shadow-lg shadow-primary/20"
+              >
+                Get Started
+              </Link>
+            </>
+          )}
 
           {/* Mobile Menu Button */}
           <button
@@ -122,13 +139,33 @@ export function Header() {
             FAQ
           </Link>
           <div className="pt-4 border-t border-slate-200 dark:border-slate-800">
-            <Link
-              href="#"
-              className="block text-sm font-semibold mb-4"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Login
-            </Link>
+            {user ? (
+              <Link
+                href="/dashboard"
+                className="flex items-center gap-2 text-sm font-semibold mb-4 text-primary"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                <LayoutDashboard className="w-4 h-4" />
+                Dashboard
+              </Link>
+            ) : (
+              <>
+                <Link
+                  href="/login"
+                  className="block text-sm font-semibold mb-4"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Login
+                </Link>
+                <Link
+                  href="/register"
+                  className="block text-sm font-semibold text-primary"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Get Started
+                </Link>
+              </>
+            )}
           </div>
         </div>
       )}

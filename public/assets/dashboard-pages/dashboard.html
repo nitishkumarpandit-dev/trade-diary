@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>TradeDiary | Analytics Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,typography,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#3b82f6",
+                        "background-light": "#f8fafc",
+                        "background-dark": "#0f172a",
+                        "card-light": "#ffffff",
+                        "card-dark": "#1e293b",
+                    },
+                    fontFamily: {
+                        display: ["Inter", "sans-serif"],
+                    },
+                    borderRadius: {
+                        DEFAULT: "0.75rem",
+                    },
+                },
+            },
+        };
+    </script>
+<style type="text/tailwindcss">
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 10px;
+        }
+        .dark .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #334155;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen">
+<header class="h-16 border-b border-slate-200 dark:border-slate-800 bg-card-light dark:bg-card-dark flex items-center justify-between px-6 sticky top-0 z-[60]">
+<div class="flex items-center">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
+<span class="material-icons-round text-white text-xl">insights</span>
+</div>
+<span class="text-xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-primary to-blue-600">TradeDiary</span>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full transition-colors" onclick="document.documentElement.classList.toggle('dark')">
+<span class="material-icons-round dark:hidden">dark_mode</span>
+<span class="material-icons-round hidden dark:block">light_mode</span>
+</button>
+<div class="h-8 w-px bg-slate-200 dark:bg-slate-800 mx-1"></div>
+<div class="flex items-center gap-3 pl-2 group cursor-pointer">
+<div class="text-right hidden sm:block">
+<p class="text-sm font-semibold">Abhay S.</p>
+<p class="text-xs text-slate-500">Standard Account</p>
+</div>
+<div class="relative">
+<div class="w-9 h-9 rounded-full bg-gradient-to-tr from-primary to-purple-500 flex items-center justify-center text-white font-bold text-sm">
+                    AS
+                </div>
+<div class="absolute -bottom-1 -right-1 w-4 h-4 bg-card-light dark:bg-card-dark rounded-full flex items-center justify-center border border-slate-200 dark:border-slate-800">
+<span class="material-icons-round text-[10px]">expand_more</span>
+</div>
+</div>
+</div>
+</div>
+</header>
+<div class="flex">
+<aside class="w-64 border-r border-slate-200 dark:border-slate-800 bg-card-light dark:bg-card-dark flex flex-col fixed top-16 bottom-0 z-50 overflow-y-auto">
+<nav class="flex-1 px-4 space-y-1 mt-6">
+<a class="flex items-center gap-3 px-4 py-3 text-primary bg-blue-50 dark:bg-blue-900/20 rounded-xl font-medium" href="#">
+<span class="material-icons-round text-[22px]">dashboard</span>
+                Dashboard
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-xl transition-all" href="#">
+<span class="material-icons-round text-[22px]">list_alt</span>
+                Trades
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-xl transition-all" href="#">
+<span class="material-icons-round text-[22px]">auto_fix_high</span>
+                Strategies
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-xl transition-all" href="#">
+<span class="material-icons-round text-[22px]">analytics</span>
+                Analytics
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-xl transition-all" href="#">
+<span class="material-icons-round text-[22px]">psychology</span>
+                Psychology
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-xl transition-all" href="#">
+<span class="material-icons-round text-[22px]">settings</span>
+                Settings
+            </a>
+</nav>
+<div class="p-4 mt-auto space-y-4">
+<div class="bg-slate-50 dark:bg-slate-800/50 p-4 rounded-2xl border border-slate-100 dark:border-slate-800">
+<p class="text-xs font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-2">Pro Plan</p>
+<div class="w-full bg-slate-200 dark:bg-slate-700 h-1.5 rounded-full mb-3">
+<div class="bg-primary h-1.5 rounded-full w-3/4"></div>
+</div>
+<p class="text-xs text-slate-600 dark:text-slate-400 mb-3">750/1000 monthly trades</p>
+<button class="w-full py-2 bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 rounded-lg text-xs font-semibold hover:shadow-sm transition-all">Upgrade Now</button>
+</div>
+<div class="pt-2 border-t border-slate-100 dark:border-slate-800">
+<button class="flex items-center gap-3 px-4 py-3 w-full text-slate-600 dark:text-slate-400 hover:text-red-500 dark:hover:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/10 rounded-xl transition-all">
+<span class="material-icons-round text-[22px]">logout</span>
+<span class="font-medium">Sign Out</span>
+</button>
+</div>
+</div>
+</aside>
+<main class="flex-1 ml-64 min-h-screen">
+<div class="p-8 space-y-8 custom-scrollbar">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+<div>
+<h1 class="text-2xl font-bold tracking-tight">Trading Performance</h1>
+<p class="text-slate-500 dark:text-slate-400 text-sm mt-1">Review your trading activity and metrics</p>
+</div>
+<div class="flex items-center gap-3">
+<button class="flex items-center gap-2 px-4 py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700 rounded-xl text-sm font-medium text-slate-700 dark:text-slate-200 transition-colors shadow-sm">
+<span class="material-icons-round text-lg text-slate-400">calendar_today</span>
+<span>Last 30 Days</span>
+<span class="material-icons-round text-lg text-slate-400">expand_more</span>
+</button>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+<div class="bg-card-light dark:bg-card-dark p-6 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-blue-100 dark:bg-blue-900/30 text-blue-600 rounded-xl">
+<span class="material-icons-round">payments</span>
+</div>
+<span class="text-xs font-medium text-green-500 bg-green-100 dark:bg-green-900/30 px-2 py-0.5 rounded-full">+12.4%</span>
+</div>
+<p class="text-slate-500 dark:text-slate-400 text-sm font-medium">Net Profit / Loss</p>
+<h3 class="text-2xl font-bold mt-1">₹48,250.00</h3>
+</div>
+<div class="bg-card-light dark:bg-card-dark p-6 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-purple-100 dark:bg-purple-900/30 text-purple-600 rounded-xl">
+<span class="material-icons-round">star</span>
+</div>
+<span class="text-xs font-medium text-slate-500 bg-slate-100 dark:bg-slate-800 px-2 py-0.5 rounded-full">65% Win</span>
+</div>
+<p class="text-slate-500 dark:text-slate-400 text-sm font-medium">Win Rate</p>
+<h3 class="text-2xl font-bold mt-1">68.2%</h3>
+</div>
+<div class="bg-card-light dark:bg-card-dark p-6 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-orange-100 dark:bg-orange-900/30 text-orange-600 rounded-xl">
+<span class="material-icons-round">trending_up</span>
+</div>
+<span class="text-xs font-medium text-red-500 bg-red-100 dark:bg-red-900/30 px-2 py-0.5 rounded-full">-2.1%</span>
+</div>
+<p class="text-slate-500 dark:text-slate-400 text-sm font-medium">Max Drawdown</p>
+<h3 class="text-2xl font-bold mt-1">4.2%</h3>
+</div>
+<div class="bg-card-light dark:bg-card-dark p-6 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-600 rounded-xl">
+<span class="material-icons-round">assignment</span>
+</div>
+<span class="text-xs font-medium text-slate-500 bg-slate-100 dark:bg-slate-800 px-2 py-0.5 rounded-full">Avg 4/day</span>
+</div>
+<p class="text-slate-500 dark:text-slate-400 text-sm font-medium">Total Trades</p>
+<h3 class="text-2xl font-bold mt-1">124</h3>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<div class="lg:col-span-2 bg-card-light dark:bg-card-dark p-6 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
+<div class="flex justify-between items-center mb-6">
+<h2 class="text-lg font-bold">Equity Curve</h2>
+<div class="flex gap-2">
+<button class="px-3 py-1 text-xs font-medium bg-slate-100 dark:bg-slate-800 rounded-md">P/L %</button>
+<button class="px-3 py-1 text-xs font-medium text-slate-500">P/L ₹</button>
+</div>
+</div>
+<div class="h-64 flex flex-col justify-end">
+<div class="relative w-full h-full flex items-end">
+<svg class="w-full h-full" preserveAspectRatio="none" viewBox="0 0 800 200">
+<defs>
+<linearGradient id="chartGradient" x1="0%" x2="0%" y1="0%" y2="100%">
+<stop offset="0%" style="stop-color:rgba(59, 130, 246, 0.2)"></stop>
+<stop offset="100%" style="stop-color:rgba(59, 130, 246, 0)"></stop>
+</linearGradient>
+</defs>
+<line class="text-slate-100 dark:text-slate-800" stroke="currentColor" stroke-dasharray="4" x1="0" x2="800" y1="50" y2="50"></line>
+<line class="text-slate-100 dark:text-slate-800" stroke="currentColor" stroke-dasharray="4" x1="0" x2="800" y1="100" y2="100"></line>
+<line class="text-slate-100 dark:text-slate-800" stroke="currentColor" stroke-dasharray="4" x1="0" x2="800" y1="150" y2="150"></line>
+<path d="M0,150 L100,140 L200,160 L300,120 L400,130 L500,80 L600,90 L700,40 L800,60 V200 H0 Z" fill="url(#chartGradient)"></path>
+<path d="M0,150 L100,140 L200,160 L300,120 L400,130 L500,80 L600,90 L700,40 L800,60" fill="none" stroke="#3b82f6" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"></path>
+<circle cx="500" cy="80" fill="#3b82f6" r="5"></circle>
+<circle cx="700" cy="40" fill="#3b82f6" r="5"></circle>
+</svg>
+</div>
+<div class="flex justify-between mt-4 text-xs text-slate-400 font-medium px-1">
+<span>01 May</span>
+<span>08 May</span>
+<span>15 May</span>
+<span>22 May</span>
+<span>29 May</span>
+</div>
+</div>
+</div>
+<div class="bg-card-light dark:bg-card-dark p-6 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col">
+<h2 class="text-lg font-bold mb-4">Psychology Insights</h2>
+<div class="space-y-4 flex-1">
+<div class="p-4 bg-slate-50 dark:bg-slate-800/40 rounded-xl">
+<p class="text-xs text-slate-500 dark:text-slate-400 uppercase font-bold tracking-wider mb-2">Dominant Emotion</p>
+<div class="flex items-center gap-2">
+<span class="text-xl">😌</span>
+<span class="text-sm font-semibold">Calm &amp; Disciplined</span>
+</div>
+</div>
+<div class="space-y-3">
+<p class="text-xs text-slate-500 dark:text-slate-400 uppercase font-bold tracking-wider">Top Tags This Week</p>
+<div class="flex flex-wrap gap-2">
+<span class="px-3 py-1 bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 text-xs font-medium rounded-full">#Breakout</span>
+<span class="px-3 py-1 bg-green-50 dark:bg-green-900/30 text-green-600 dark:text-green-400 text-xs font-medium rounded-full">#TrendFollowing</span>
+<span class="px-3 py-1 bg-purple-50 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400 text-xs font-medium rounded-full">#VWAP</span>
+<span class="px-3 py-1 bg-amber-50 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400 text-xs font-medium rounded-full">#FOMO</span>
+<span class="px-3 py-1 bg-red-50 dark:bg-red-900/30 text-red-600 dark:text-red-400 text-xs font-medium rounded-full">#RevengeTrade</span>
+</div>
+</div>
+</div>
+<div class="mt-6 pt-4 border-t border-slate-100 dark:border-slate-800">
+<p class="text-xs text-slate-500 italic">"Focus on risk management today. Your last 3 losses were due to premature exits."</p>
+</div>
+</div>
+</div>
+<div class="bg-card-light dark:bg-card-dark rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden mb-8">
+<div class="p-6 border-b border-slate-100 dark:border-slate-800 flex justify-between items-center">
+<h2 class="text-lg font-bold">Recent Trades</h2>
+<button class="text-primary text-sm font-semibold hover:underline">View All Trades</button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead class="bg-slate-50 dark:bg-slate-800/50 text-slate-500 dark:text-slate-400 text-xs uppercase font-semibold">
+<tr>
+<th class="px-6 py-4">Symbol</th>
+<th class="px-6 py-4">Type</th>
+<th class="px-6 py-4">Entry Price</th>
+<th class="px-6 py-4">Exit Price</th>
+<th class="px-6 py-4">Qty</th>
+<th class="px-6 py-4">P/L (₹)</th>
+<th class="px-6 py-4">Status</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-100 dark:divide-slate-800 text-sm">
+<tr class="hover:bg-slate-50/50 dark:hover:bg-slate-800/30 transition-colors">
+<td class="px-6 py-4 font-semibold">RELIANCE</td>
+<td class="px-6 py-4"><span class="px-2 py-1 bg-green-100 dark:bg-green-900/30 text-green-600 rounded text-xs font-bold">BUY</span></td>
+<td class="px-6 py-4">2,845.20</td>
+<td class="px-6 py-4">2,872.50</td>
+<td class="px-6 py-4">50</td>
+<td class="px-6 py-4 font-semibold text-green-600">+1,365.00</td>
+<td class="px-6 py-4"><span class="px-2 py-1 bg-slate-100 dark:bg-slate-800 rounded-full text-[10px] font-bold">CLOSED</span></td>
+</tr>
+<tr class="hover:bg-slate-50/50 dark:hover:bg-slate-800/30 transition-colors">
+<td class="px-6 py-4 font-semibold">NIFTY JUN FUT</td>
+<td class="px-6 py-4"><span class="px-2 py-1 bg-red-100 dark:bg-red-900/30 text-red-600 rounded text-xs font-bold">SELL</span></td>
+<td class="px-6 py-4">23,450.00</td>
+<td class="px-6 py-4">23,490.00</td>
+<td class="px-6 py-4">25</td>
+<td class="px-6 py-4 font-semibold text-red-600">-1,000.00</td>
+<td class="px-6 py-4"><span class="px-2 py-1 bg-slate-100 dark:bg-slate-800 rounded-full text-[10px] font-bold">CLOSED</span></td>
+</tr>
+<tr class="hover:bg-slate-50/50 dark:hover:bg-slate-800/30 transition-colors">
+<td class="px-6 py-4 font-semibold">TCS</td>
+<td class="px-6 py-4"><span class="px-2 py-1 bg-green-100 dark:bg-green-900/30 text-green-600 rounded text-xs font-bold">BUY</span></td>
+<td class="px-6 py-4">3,912.00</td>
+<td class="px-6 py-4">3,955.00</td>
+<td class="px-6 py-4">20</td>
+<td class="px-6 py-4 font-semibold text-green-600">+860.00</td>
+<td class="px-6 py-4"><span class="px-2 py-1 bg-slate-100 dark:bg-slate-800 rounded-full text-[10px] font-bold">CLOSED</span></td>
+</tr>
+<tr class="hover:bg-slate-50/50 dark:hover:bg-slate-800/30 transition-colors">
+<td class="px-6 py-4 font-semibold">INFY</td>
+<td class="px-6 py-4"><span class="px-2 py-1 bg-green-100 dark:bg-green-900/30 text-green-600 rounded text-xs font-bold">BUY</span></td>
+<td class="px-6 py-4">1,480.00</td>
+<td class="px-6 py-4">-</td>
+<td class="px-6 py-4">100</td>
+<td class="px-6 py-4 font-semibold text-slate-400">--</td>
+<td class="px-6 py-4"><span class="px-2 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-600 rounded-full text-[10px] font-bold uppercase tracking-tight">Open Position</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</main>
+</div>
+<button class="fixed bottom-8 right-8 w-14 h-14 bg-primary text-white rounded-full shadow-xl hover:scale-110 active:scale-95 transition-all flex items-center justify-center z-[70]">
+<span class="material-icons-round text-3xl">add</span>
+</button>
+
+</body></html>
