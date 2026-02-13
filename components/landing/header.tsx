@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useTheme } from "next-themes";
 import { LineChart, Moon, Sun, Menu, X, LayoutDashboard } from "lucide-react";
 import { User } from "next-auth";
+import { motion } from "framer-motion";
 
 interface HeaderProps {
   user?: User;
@@ -15,7 +16,12 @@ export function Header({ user }: HeaderProps) {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 
   return (
-    <header className="sticky top-0 z-50 bg-white/80 dark:bg-background-dark/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800">
+    <motion.header
+      initial={{ opacity: 0, y: -20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
+      className="sticky top-0 z-50 bg-white/80 dark:bg-background-dark/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800"
+    >
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
         <div className="flex items-center gap-2">
           <div className="bg-primary p-1.5 rounded-lg">
@@ -26,29 +32,50 @@ export function Header({ user }: HeaderProps) {
 
         {/* Desktop Navigation */}
         <div className="hidden md:flex items-center gap-8 text-sm font-medium text-slate-600 dark:text-slate-400">
-          <Link href="#" className="hover:text-primary transition-colors">
-            Home
+          <Link href="#" className="relative group hover:text-primary transition-colors">
+            <span>Home</span>
+            <motion.span
+              className="absolute left-0 -bottom-1 h-0.5 bg-primary"
+              initial={{ width: 0 }}
+              whileHover={{ width: "100%" }}
+              transition={{ duration: 0.3, ease: "easeOut" }}
+            />
           </Link>
-          <Link
-            href="#features"
-            className="hover:text-primary transition-colors"
-          >
-            Features
+          <Link href="#features" className="relative group hover:text-primary transition-colors">
+            <span>Features</span>
+            <motion.span
+              className="absolute left-0 -bottom-1 h-0.5 bg-primary"
+              initial={{ width: 0 }}
+              whileHover={{ width: "100%" }}
+              transition={{ duration: 0.3, ease: "easeOut" }}
+            />
           </Link>
-          <Link
-            href="#how-it-works"
-            className="hover:text-primary transition-colors"
-          >
-            How it Works
+          <Link href="#how-it-works" className="relative group hover:text-primary transition-colors">
+            <span>How it Works</span>
+            <motion.span
+              className="absolute left-0 -bottom-1 h-0.5 bg-primary"
+              initial={{ width: 0 }}
+              whileHover={{ width: "100%" }}
+              transition={{ duration: 0.3, ease: "easeOut" }}
+            />
           </Link>
-          <Link
-            href="#pricing"
-            className="hover:text-primary transition-colors"
-          >
-            Pricing
+          <Link href="#pricing" className="relative group hover:text-primary transition-colors">
+            <span>Pricing</span>
+            <motion.span
+              className="absolute left-0 -bottom-1 h-0.5 bg-primary"
+              initial={{ width: 0 }}
+              whileHover={{ width: "100%" }}
+              transition={{ duration: 0.3, ease: "easeOut" }}
+            />
           </Link>
-          <Link href="#faq" className="hover:text-primary transition-colors">
-            FAQ
+          <Link href="#faq" className="relative group hover:text-primary transition-colors">
+            <span>FAQ</span>
+            <motion.span
+              className="absolute left-0 -bottom-1 h-0.5 bg-primary"
+              initial={{ width: 0 }}
+              whileHover={{ width: "100%" }}
+              transition={{ duration: 0.3, ease: "easeOut" }}
+            />
           </Link>
         </div>
 
@@ -77,12 +104,14 @@ export function Header({ user }: HeaderProps) {
               >
                 Login
               </Link>
-              <Link
+              <motion.a
                 href="/register"
-                className="bg-primary hidden sm:block text-white px-5 py-2 rounded-full text-sm font-semibold hover:bg-blue-700 transition-all shadow-lg shadow-primary/20"
+                className="bg-primary hidden sm:block text-white px-5 py-2 rounded-full text-sm font-semibold shadow-lg shadow-primary/20"
+                whileHover={{ scale: 1.05, boxShadow: "0 0 24px rgba(19,127,236,0.35)" }}
+                transition={{ duration: 0.3, ease: "easeOut" }}
               >
                 Get Started
-              </Link>
+              </motion.a>
             </>
           )}
 
@@ -169,6 +198,6 @@ export function Header({ user }: HeaderProps) {
           </div>
         </div>
       )}
-    </header>
+    </motion.header>
   );
 }

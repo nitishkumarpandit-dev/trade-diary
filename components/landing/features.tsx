@@ -1,4 +1,6 @@
+ "use client";
 import { BarChart2, CheckCircle, Bot, Zap } from "lucide-react";
+import { motion } from "framer-motion";
 
 export function Features() {
   return (
@@ -6,7 +8,16 @@ export function Features() {
       className="py-24 bg-background-light dark:bg-background-dark"
       id="features"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center mb-16">
+      <motion.div
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, amount: 0.2 }}
+        variants={{
+          hidden: { opacity: 0, y: 20 },
+          show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
+        }}
+        className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center mb-16"
+      >
         <span className="text-primary text-sm font-bold tracking-widest uppercase">
           Features
         </span>
@@ -17,12 +28,23 @@ export function Features() {
           Powerful features to help traders track performance, refine
           strategies, and grow consistently.
         </p>
-      </div>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-        <div className="bg-white dark:bg-slate-800 p-8 rounded-3xl border border-slate-100 dark:border-slate-700 hover:shadow-xl transition-shadow group">
-          <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+      </motion.div>
+      <motion.div
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, amount: 0.2 }}
+        variants={{ hidden: {}, show: { transition: { staggerChildren: 0.12 } } }}
+        className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 lg:grid-cols-3 gap-8"
+      >
+        <motion.div
+          variants={{ hidden: { opacity: 0, y: 20 }, show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } } }}
+          whileHover={{ scale: 1.03, boxShadow: "0 10px 30px rgba(0,0,0,0.08)" }}
+          transition={{ duration: 0.3, ease: "easeOut" }}
+          className="bg-white dark:bg-slate-800 p-8 rounded-3xl border border-slate-100 dark:border-slate-700 group"
+        >
+          <motion.div whileHover={{ rotate: 5 }} className="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-xl flex items-center justify-center mb-6">
             <BarChart2 className="text-primary w-6 h-6" />
-          </div>
+          </motion.div>
           <h3 className="text-xl font-bold mb-4">Advanced Analytics</h3>
           <p className="text-slate-600 dark:text-slate-400 text-sm mb-6">
             Gain powerful trading insights with detailed reports and
@@ -42,11 +64,16 @@ export function Features() {
               performance reports
             </li>
           </ul>
-        </div>
-        <div className="bg-white dark:bg-slate-800 p-8 rounded-3xl border border-slate-100 dark:border-slate-700 hover:shadow-xl transition-shadow group">
-          <div className="w-12 h-12 bg-orange-100 dark:bg-orange-900/30 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+        </motion.div>
+        <motion.div
+          variants={{ hidden: { opacity: 0, y: 20 }, show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } } }}
+          whileHover={{ scale: 1.03, boxShadow: "0 10px 30px rgba(0,0,0,0.08)" }}
+          transition={{ duration: 0.3, ease: "easeOut" }}
+          className="bg-white dark:bg-slate-800 p-8 rounded-3xl border border-slate-100 dark:border-slate-700 group"
+        >
+          <motion.div whileHover={{ rotate: -8 }} className="w-12 h-12 bg-orange-100 dark:bg-orange-900/30 rounded-xl flex items-center justify-center mb-6">
             <Bot className="text-orange-500 w-6 h-6" />
-          </div>
+          </motion.div>
           <h3 className="text-xl font-bold mb-4">AI Summariser</h3>
           <p className="text-slate-600 dark:text-slate-400 text-sm mb-6">
             Let AI instantly analyse your trades and spot patterns you missed.
@@ -65,11 +92,16 @@ export function Features() {
               weakness detection
             </li>
           </ul>
-        </div>
-        <div className="bg-white dark:bg-slate-800 p-8 rounded-3xl border border-slate-100 dark:border-slate-700 hover:shadow-xl transition-shadow group">
-          <div className="w-12 h-12 bg-rose-100 dark:bg-rose-900/30 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+        </motion.div>
+        <motion.div
+          variants={{ hidden: { opacity: 0, y: 20 }, show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } } }}
+          whileHover={{ scale: 1.03, boxShadow: "0 10px 30px rgba(0,0,0,0.08)" }}
+          transition={{ duration: 0.3, ease: "easeOut" }}
+          className="bg-white dark:bg-slate-800 p-8 rounded-3xl border border-slate-100 dark:border-slate-700 group"
+        >
+          <motion.div whileHover={{ rotate: 6 }} className="w-12 h-12 bg-rose-100 dark:bg-rose-900/30 rounded-xl flex items-center justify-center mb-6">
             <Zap className="text-rose-500 w-6 h-6" />
-          </div>
+          </motion.div>
           <h3 className="text-xl font-bold mb-4">Fast Trade Entry</h3>
           <p className="text-slate-600 dark:text-slate-400 text-sm mb-6">
             Log trades effortlessly so you can focus on trading, not data entry.
@@ -88,8 +120,8 @@ export function Features() {
               Syncs
             </li>
           </ul>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
     </section>
   );
 }
