@@ -16,13 +16,13 @@ export async function POST() {
       console.error("Razorpay keys missing");
       return NextResponse.json(
         { message: "Razorpay keys not configured" },
-        { status: 500 },
+        { status: 400 },
       );
     }
 
     console.log("Creating Razorpay order", {
       userId: session.user.id,
-      amount: 500,
+      amount: 9900,
       currency: "INR",
     });
     const rp = new Razorpay({ key_id, key_secret });
@@ -30,7 +30,7 @@ export async function POST() {
     const ts = Date.now().toString().slice(-6);
     const receipt = `pro_${uid}_${ts}`;
     const order = await rp.orders.create({
-      amount: 500,
+      amount: 9900,
       currency: "INR",
       receipt,
       notes: {
