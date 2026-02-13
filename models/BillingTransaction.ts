@@ -1,7 +1,7 @@
-import mongoose, { Schema, Model, Document } from "mongoose";
+import mongoose, { Schema, Model, Document, Types } from "mongoose";
 
 export interface IBillingTransaction extends Document {
-  userId: Schema.Types.ObjectId;
+  userId: Types.ObjectId;
   orderId: string;
   paymentId: string;
   receipt?: string;

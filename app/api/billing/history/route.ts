@@ -3,7 +3,8 @@ import { NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
 import connectDB from "@/lib/mongodb";
 import BillingTransaction from "@/models/BillingTransaction";
- 
+import mongoose, { Types } from "mongoose";
+
 export async function GET() {
   try {
     const session = await auth();
@@ -11,9 +12,8 @@ export async function GET() {
       return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
     }
     await connectDB();
-    const items = await BillingTransaction.find({
-      userId: session.user.id,
-    })
+    const userObjectId = new Types.ObjectId(session.user.id);
+    const items = await BillingTransaction.find({ userId: userObjectId })
       .sort({ createdAt: -1 })
       .limit(50)
       .lean();
@@ -34,7 +34,8 @@ export async function GET() {
   } catch (error) {
     return NextResponse.json(
       {
-        message: error instanceof Error ? error.message : "Failed to fetch history",
+        message:
+          error instanceof Error ? error.message : "Failed to fetch history",
       },
       { status: 500 },
     );
