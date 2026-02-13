@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -99,6 +99,65 @@ export default function SettingsClient({
   const [prefSuccessMessage, setPrefSuccessMessage] = useState("");
   const [prefErrorMessage, setPrefErrorMessage] = useState("");
   const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
+  const [billingLoading, setBillingLoading] = useState(false);
+  const [billingItems, setBillingItems] = useState<
+    Array<{
+      id: string;
+      orderId: string;
+      paymentId: string;
+      receipt?: string;
+      amount: number;
+      currency: string;
+      status: string;
+      method?: string;
+      createdAt: string | Date;
+    }>
+  >([]);
+
+  useEffect(() => {
+    const load = async () => {
+      try {
+        setBillingLoading(true);
+        const res = await fetch("/api/billing/history");
+        const data = await res.json();
+        if (res.ok && Array.isArray(data)) {
+          setBillingItems(data);
+        }
+      } finally {
+        setBillingLoading(false);
+      }
+    };
+    load();
+  }, []);
+
+  const downloadInvoice = (item: {
+    orderId: string;
+    paymentId: string;
+    receipt?: string;
+    amount: number;
+    currency: string;
+    status: string;
+    method?: string;
+    createdAt: string | Date;
+  }) => {
+    const rows = [
+      ["Invoice", item.receipt || item.orderId],
+      ["Date", new Date(item.createdAt).toLocaleString("en-IN")],
+      ["Amount", `${(item.amount / 100).toFixed(2)} ${item.currency}`],
+      ["Status", item.status],
+      ["Payment ID", item.paymentId],
+      ["Method", item.method || "-"],
+    ];
+    const csv =
+      "data:text/csv;charset=utf-8," +
+      rows.map((r) => r.map((c) => `"${String(c).replace(/"/g, '""')}"`).join(",")).join("\n");
+    const link = document.createElement("a");
+    link.setAttribute("href", encodeURI(csv));
+    link.setAttribute("download", `${item.receipt || item.orderId}.csv`);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
 
   const {
     register,
@@ -959,23 +1018,56 @@ export default function SettingsClient({
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-slate-100 dark:divide-slate-800 text-sm">
-                      <tr>
-                        <td className="px-6 py-4 font-medium">INV-00124</td>
-                        <td className="px-6 py-4 text-slate-500">
-                          Oct 24, 2024
-                        </td>
-                        <td className="px-6 py-4">$0.00</td>
-                        <td className="px-6 py-4">
-                          <span className="px-2 py-1 bg-green-100 dark:bg-green-900/30 text-green-600 text-[10px] font-bold uppercase rounded-lg">
-                            Paid
-                          </span>
-                        </td>
-                        <td className="px-6 py-4 text-right">
-                          <button className="text-primary hover:underline">
-                            PDF
-                          </button>
-                        </td>
-                      </tr>
+                      {billingLoading ? (
+                        <tr>
+                          <td colSpan={5} className="px-6 py-6 text-center text-slate-500">
+                            Loading...
+                          </td>
+                        </tr>
+                      ) : billingItems.length > 0 ? (
+                        billingItems.map((item) => (
+                          <tr key={item.id} className="hover:bg-slate-50/50 dark:hover:bg-slate-800/30 transition-colors">
+                            <td className="px-6 py-4 font-medium">
+                              {item.receipt || item.orderId}
+                            </td>
+                            <td className="px-6 py-4 text-slate-500">
+                              {new Date(item.createdAt).toLocaleDateString("en-IN", {
+                                day: "numeric",
+                                month: "short",
+                                year: "numeric",
+                              })}
+                            </td>
+                            <td className="px-6 py-4">
+                              ₹{(item.amount / 100).toLocaleString("en-IN")}
+                            </td>
+                            <td className="px-6 py-4">
+                              <span
+                                className={`px-2 py-1 text-[10px] font-bold uppercase rounded-lg ${
+                                  item.status === "captured" || item.status === "paid"
+                                    ? "bg-green-100 dark:bg-green-900/30 text-green-600"
+                                    : "bg-yellow-100 dark:bg-yellow-900/30 text-yellow-600"
+                                }`}
+                              >
+                                {item.status}
+                              </span>
+                            </td>
+                            <td className="px-6 py-4 text-right">
+                              <button
+                                onClick={() => downloadInvoice(item)}
+                                className="text-primary hover:underline"
+                              >
+                                CSV
+                              </button>
+                            </td>
+                          </tr>
+                        ))
+                      ) : (
+                        <tr>
+                          <td colSpan={5} className="px-6 py-6 text-center text-slate-500">
+                            No billing records found.
+                          </td>
+                        </tr>
+                      )}
                     </tbody>
                   </table>
                 </div>

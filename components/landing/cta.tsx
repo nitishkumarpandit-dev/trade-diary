@@ -1,6 +1,12 @@
+"use client";
 import { Rocket } from "lucide-react";
+import Link from "next/link";
 
-export function CTA() {
+export function CTA({
+  isAuthenticated = false,
+}: {
+  isAuthenticated?: boolean;
+}) {
   return (
     <section className="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div className="bg-primary rounded-[3rem] p-12 text-center text-white relative overflow-hidden shadow-2xl shadow-primary/20">
@@ -12,10 +18,13 @@ export function CTA() {
           Get started with Trade Diary's powerful analytics to improve your
           trading performance today.
         </p>
-        <button className="bg-white text-primary px-10 py-5 rounded-2xl font-bold text-xl hover:bg-slate-100 transition-colors flex items-center gap-3 mx-auto relative z-10">
+        <Link
+          href={isAuthenticated ? "/dashboard" : "/register"}
+          className="bg-white text-primary px-10 py-5 rounded-2xl font-bold text-xl hover:bg-slate-100 transition-colors flex items-center gap-3 mx-auto relative z-10"
+        >
           <Rocket className="w-6 h-6" />
           Start Journaling Now
-        </button>
+        </Link>
       </div>
     </section>
   );

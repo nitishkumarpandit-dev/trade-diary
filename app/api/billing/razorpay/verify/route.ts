@@ -5,6 +5,8 @@ import { auth } from "@/lib/auth";
 import connectDB from "@/lib/mongodb";
 import User from "@/models/User";
 import { revalidatePath } from "next/cache";
+import Razorpay from "razorpay";
+import BillingTransaction from "@/models/BillingTransaction";
 
 export async function POST(req: Request) {
   try {
@@ -58,6 +60,18 @@ export async function POST(req: Request) {
     }
 
     await connectDB();
+    const key_id = process.env.RAZORPAY_KEY_ID;
+    const key_secret = process.env.RAZORPAY_KEY_SECRET;
+    const rp = key_id && key_secret ? new Razorpay({ key_id, key_secret }) : null;
+    let paymentDetails: any = null;
+    if (rp) {
+      try {
+        paymentDetails = await rp.payments.fetch(razorpay_payment_id);
+      } catch (e) {
+        paymentDetails = null;
+      }
+    }
+
     const user = await User.findById(session.user.id);
     if (!user) {
       return NextResponse.json({ message: "User not found" }, { status: 404 });
@@ -69,6 +83,20 @@ export async function POST(req: Request) {
     user.plan.resetDate = new Date();
     user.accountType = "pro";
     await user.save();
+
+    await BillingTransaction.create({
+      userId: user._id,
+      orderId: razorpay_order_id,
+      paymentId: razorpay_payment_id,
+      receipt: paymentDetails?.receipt,
+      amount: paymentDetails?.amount ?? 0,
+      currency: paymentDetails?.currency ?? "INR",
+      status: paymentDetails?.status ?? "paid",
+      method: paymentDetails?.method,
+      email: paymentDetails?.email,
+      contact: paymentDetails?.contact,
+      notes: paymentDetails ?? undefined,
+    });
 
     revalidatePath("/dashboard");
     revalidatePath("/dashboard/settings");

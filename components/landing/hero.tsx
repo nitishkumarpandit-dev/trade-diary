@@ -1,4 +1,5 @@
-import { Rocket, PlayCircle, TrendingUp } from "lucide-react"
+import { Rocket, PlayCircle, TrendingUp } from "lucide-react";
+import Link from "next/link";
 
 export function Hero() {
   return (
@@ -11,17 +12,22 @@ export function Hero() {
               Trade Smarter, Not Harder
             </span>
             <h1 className="text-5xl lg:text-6xl font-extrabold tracking-tight mb-6 leading-[1.1]">
-              India's Most Advanced <br />
+              India&apos;s Most Advanced <br />
               <span className="text-primary">Trading Journal</span>
             </h1>
             <p className="text-lg text-slate-600 dark:text-slate-400 mb-10 max-w-xl leading-relaxed">
-              Track, analyze, and elevate your trading performance with our intelligent platform designed for serious traders. Gain insights, spot patterns, and maximize profits.
+              Track, analyze, and elevate your trading performance with our
+              intelligent platform designed for serious traders. Gain insights,
+              spot patterns, and maximize profits.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
-              <button className="bg-primary text-white px-8 py-4 rounded-xl font-bold text-lg hover:bg-blue-700 transition-all flex items-center justify-center gap-2 shadow-xl shadow-primary/30">
+              <Link
+                href={"/login"}
+                className="bg-primary text-white px-8 py-4 rounded-xl font-bold text-lg hover:bg-blue-700 transition-all flex items-center justify-center gap-2 shadow-xl shadow-primary/30"
+              >
                 <Rocket className="w-5 h-5" />
                 Get Started Free
-              </button>
+              </Link>
               <button className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 px-8 py-4 rounded-xl font-bold text-lg hover:border-primary transition-all flex items-center justify-center gap-2">
                 <PlayCircle className="w-5 h-5" />
                 Watch Demo
@@ -49,15 +55,21 @@ export function Hero() {
                 </div>
                 <div className="grid grid-cols-3 gap-4">
                   <div className="bg-blue-500/10 p-4 rounded-xl border border-blue-500/20">
-                    <p className="text-[10px] uppercase font-bold text-blue-500 mb-1">Win Rate</p>
+                    <p className="text-[10px] uppercase font-bold text-blue-500 mb-1">
+                      Win Rate
+                    </p>
                     <p className="text-xl font-bold">64.2%</p>
                   </div>
                   <div className="bg-indigo-500/10 p-4 rounded-xl border border-indigo-500/20">
-                    <p className="text-[10px] uppercase font-bold text-indigo-500 mb-1">P/L</p>
+                    <p className="text-[10px] uppercase font-bold text-indigo-500 mb-1">
+                      P/L
+                    </p>
                     <p className="text-xl font-bold">+$4.2k</p>
                   </div>
                   <div className="bg-emerald-500/10 p-4 rounded-xl border border-emerald-500/20">
-                    <p className="text-[10px] uppercase font-bold text-emerald-500 mb-1">Trades</p>
+                    <p className="text-[10px] uppercase font-bold text-emerald-500 mb-1">
+                      Trades
+                    </p>
                     <p className="text-xl font-bold">142</p>
                   </div>
                 </div>
@@ -76,5 +88,5 @@ export function Hero() {
         </div>
       </div>
     </section>
-  )
+  );
 }

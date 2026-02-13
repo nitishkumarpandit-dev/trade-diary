@@ -20,9 +20,9 @@ export default async function Home() {
         <StatsSection />
         <Features />
         <HowItWorks />
-        <Pricing />
+        <Pricing isAuthenticated={!!session?.user} />
         <FAQ />
-        <CTA />
+        <CTA isAuthenticated={!!session?.user} />
       </main>
       <Footer />
     </div>
