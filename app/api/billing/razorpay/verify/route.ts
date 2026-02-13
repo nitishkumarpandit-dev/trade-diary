@@ -7,6 +7,17 @@ import User from "@/models/User";
 import { revalidatePath } from "next/cache";
 import Razorpay from "razorpay";
 import BillingTransaction from "@/models/BillingTransaction";
+import { Types } from "mongoose";
+type PaymentDetailsMinimal = {
+  receipt?: string;
+  amount?: number;
+  currency?: string;
+  status?: string;
+  method?: string;
+  email?: string;
+  contact?: string;
+  [key: string]: unknown;
+} | null;
 
 export async function POST(req: Request) {
   try {
@@ -62,12 +73,49 @@ export async function POST(req: Request) {
     await connectDB();
     const key_id = process.env.RAZORPAY_KEY_ID;
     const key_secret = process.env.RAZORPAY_KEY_SECRET;
-    const rp = key_id && key_secret ? new Razorpay({ key_id, key_secret }) : null;
-    let paymentDetails: any = null;
+    const rp =
+      key_id && key_secret ? new Razorpay({ key_id, key_secret }) : null;
+    let paymentDetails: PaymentDetailsMinimal = null;
     if (rp) {
       try {
-        paymentDetails = await rp.payments.fetch(razorpay_payment_id);
-      } catch (e) {
+        const fetchedRaw = (await rp.payments.fetch(
+          razorpay_payment_id,
+        )) as unknown as Record<string, unknown>;
+        const amtVal = fetchedRaw["amount"];
+        const amount =
+          typeof amtVal === "string"
+            ? Number(amtVal)
+            : typeof amtVal === "number"
+              ? amtVal
+              : undefined;
+        paymentDetails = {
+          receipt:
+            typeof fetchedRaw["receipt"] === "string"
+              ? (fetchedRaw["receipt"] as string)
+              : undefined,
+          amount,
+          currency:
+            typeof fetchedRaw["currency"] === "string"
+              ? (fetchedRaw["currency"] as string)
+              : undefined,
+          status:
+            typeof fetchedRaw["status"] === "string"
+              ? (fetchedRaw["status"] as string)
+              : undefined,
+          method:
+            typeof fetchedRaw["method"] === "string"
+              ? (fetchedRaw["method"] as string)
+              : undefined,
+          email:
+            typeof fetchedRaw["email"] === "string"
+              ? (fetchedRaw["email"] as string)
+              : undefined,
+          contact:
+            typeof fetchedRaw["contact"] === "string"
+              ? (fetchedRaw["contact"] as string)
+              : undefined,
+        };
+      } catch {
         paymentDetails = null;
       }
     }
@@ -85,7 +133,7 @@ export async function POST(req: Request) {
     await user.save();
 
     await BillingTransaction.create({
-      userId: user._id,
+      userId: new Types.ObjectId(user._id.toString()),
       orderId: razorpay_order_id,
       paymentId: razorpay_payment_id,
       receipt: paymentDetails?.receipt,

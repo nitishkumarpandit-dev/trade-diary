@@ -1,6 +1,5 @@
 "use client";
 import { Rocket, PlayCircle, TrendingUp } from "lucide-react";
-import Link from "next/link";
 import { motion } from "framer-motion";
 
 export function Hero() {
@@ -86,8 +85,7 @@ export function Hero() {
             initial={{ opacity: 0, x: 40, scale: 0.95 }}
             whileInView={{ opacity: 1, x: 0, scale: 1 }}
             viewport={{ once: true, amount: 0.2 }}
-            animate={{ y: [0, -6, 0] }}
-            transition={{ duration: 3, ease: "easeInOut", repeat: Infinity }}
+            transition={{ duration: 0.7, ease: "easeOut" }}
             style={{ transformOrigin: "center" }}
             className="relative"
           >

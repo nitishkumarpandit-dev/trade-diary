@@ -1,4 +1,4 @@
- "use client";
+"use client";
 import { ChevronDown } from "lucide-react";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -7,29 +7,26 @@ export function FAQ() {
   const items = [
     {
       q: "How does Trade Diary help improve my trading?",
-      a:
-        "Trade Diary tracks every metric of your trading journey, highlighting exactly where you're losing money and where your edge lies. By visualizing your performance, you can eliminate bad habits and double down on what works.",
+      a: "Trade Diary tracks every metric of your trading journey, highlighting exactly where you're losing money and where your edge lies. By visualizing your performance, you can eliminate bad habits and double down on what works.",
     },
     {
       q: "Is my trading data secure?",
-      a:
-        "Absolutely. We use industry-standard bank-level encryption. Your trading data is private, encrypted at rest, and never shared with third parties.",
+      a: "Absolutely. We use industry-standard bank-level encryption. Your trading data is private, encrypted at rest, and never shared with third parties.",
     },
     {
       q: "Are there any additional costs or fees?",
-      a:
-        "No hidden fees. The price you see is exactly what you pay for the features included in your plan.",
+      a: "No hidden fees. The price you see is exactly what you pay for the features included in your plan.",
     },
   ];
   const [open, setOpen] = useState<number | null>(null);
   return (
     <section className="py-24 bg-white dark:bg-slate-900" id="faq">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl font-extrabold mb-4">
+        <div className="text-center mb-12 md:mb-16">
+          <h2 className="text-2xl md:text-3xl font-extrabold mb-3 md:mb-4">
             Frequently <span className="text-primary">Asked</span> Questions
           </h2>
-          <p className="text-slate-500">
+          <p className="text-slate-500 text-sm md:text-base">
             Find answers to common questions about TradeDiary
           </p>
         </div>
@@ -43,9 +40,11 @@ export function FAQ() {
               >
                 <button
                   onClick={() => setOpen(isOpen ? null : i)}
-                  className="w-full flex items-center justify-between p-6 cursor-pointer"
+                  className="w-full flex items-center justify-between p-5 md:p-6 cursor-pointer"
                 >
-                  <span className="font-bold text-lg">{item.q}</span>
+                  <span className="font-bold text-base md:text-lg">
+                    {item.q}
+                  </span>
                   <motion.span
                     animate={{ rotate: isOpen ? 180 : 0 }}
                     transition={{ duration: 0.4, ease: "easeOut" }}
@@ -60,9 +59,9 @@ export function FAQ() {
                       animate={{ height: "auto", opacity: 1 }}
                       exit={{ height: 0, opacity: 0 }}
                       transition={{ duration: 0.5, ease: "easeOut" }}
-                      className="px-6 pb-6"
+                      className="px-5 md:px-6 pb-5 md:pb-6"
                     >
-                      <p className="text-slate-600 dark:text-slate-400 leading-relaxed">
+                      <p className="text-slate-600 dark:text-slate-400 leading-relaxed text-sm md:text-base">
                         {item.a}
                       </p>
                     </motion.div>

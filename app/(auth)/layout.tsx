@@ -7,9 +7,9 @@ export default function AuthLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex min-h-screen w-full overflow-hidden bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 dark:from-slate-950 dark:via-slate-900 dark:to-slate-900 font-display text-slate-900 dark:text-slate-200">
+    <div className="flex min-h-screen w-full overflow-hidden bg-linear-to-br from-slate-50 via-blue-50 to-indigo-100 dark:from-slate-950 dark:via-slate-900 dark:to-slate-900 font-display text-slate-900 dark:text-slate-200">
       {/* Left Pane: Imagery & Quote (Desktop Only) - Reusable Sidebar */}
-      <div className="hidden lg:flex lg:w-5/12 relative flex-col justify-between p-12 bg-gradient-to-br from-blue-700 via-blue-800 to-indigo-900 overflow-hidden">
+      <div className="hidden lg:flex lg:w-5/12 relative flex-col justify-between p-12 bg-linear-to-br from-blue-700 via-blue-800 to-indigo-900 overflow-hidden">
         <Link href="/" className="relative z-20 flex items-center gap-3">
           <div className="w-10 h-10 bg-white rounded-xl flex items-center justify-center shadow-xl shadow-blue-900/20">
             <Activity className="text-primary h-6 w-6" />
@@ -31,11 +31,11 @@ export default function AuthLayout({
               Discipline is the bridge between goals and accomplishment.
             </h2>
             <div className="flex items-center justify-center gap-4">
-              <div className="h-[1px] w-8 bg-white/40"></div>
+              <div className="h-px w-8 bg-white/40"></div>
               <p className="text-white/90 text-sm uppercase tracking-[0.2em] font-semibold">
                 Jim Rohn
               </p>
-              <div className="h-[1px] w-8 bg-white/40"></div>
+              <div className="h-px w-8 bg-white/40"></div>
             </div>
           </div>
         </div>

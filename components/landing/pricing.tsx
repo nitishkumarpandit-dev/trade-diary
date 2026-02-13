@@ -1,7 +1,5 @@
 "use client";
-import { useState } from "react";
 import { CheckCircle } from "lucide-react";
-import Link from "next/link";
 import { motion } from "framer-motion";
 
 export function Pricing({
@@ -11,7 +9,7 @@ export function Pricing({
 }) {
   return (
     <section
-      className="py-24 bg-background-light dark:bg-background-dark"
+      className="py-24 px-4 bg-background-light dark:bg-background-dark"
       id="pricing"
     >
       <motion.div
@@ -52,7 +50,7 @@ export function Pricing({
             boxShadow: "0 20px 40px rgba(0,0,0,0.06)",
           }}
           transition={{ duration: 0.3, ease: "easeOut" }}
-          className="bg-white dark:bg-slate-800 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700 relative overflow-hidden"
+          className="bg-white dark:bg-slate-800 p-8 rounded-4xl border border-slate-200 dark:border-slate-700 relative overflow-hidden"
         >
           <div className="mb-4">
             <h3 className="text-xl font-bold">Standard Plan</h3>
@@ -89,7 +87,7 @@ export function Pricing({
           viewport={{ once: true }}
           transition={{ duration: 0.6, ease: "easeOut" }}
           animate={{ scale: [1, 1.03, 1] }}
-          className="bg-white dark:bg-slate-800 p-8 rounded-[2rem] border-2 border-primary relative overflow-hidden shadow-2xl md:scale-105"
+          className="bg-white dark:bg-slate-800 p-8 rounded-4xl border-2 border-primary relative overflow-hidden shadow-2xl md:scale-105"
         >
           <div className="absolute top-4 right-4 bg-primary text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-widest">
             Popular
@@ -121,7 +119,7 @@ export function Pricing({
             Upgrade to Pro
           </motion.a>
           <motion.div
-            className="absolute inset-0 rounded-[2rem] pointer-events-none"
+            className="absolute inset-0 rounded-4xl pointer-events-none"
             initial={{ boxShadow: "0 0 0 0px rgba(34,197,94,0.0)" }}
             animate={{
               boxShadow: [
@@ -140,40 +138,22 @@ export function Pricing({
 }
 
 function PricingComparison() {
-  const [showDifferencesOnly, setShowDifferencesOnly] = useState(false);
   const rows = [
-    {
-      feature: "Trade entries per month",
-      standard: "100",
-      pro: "Unlimited",
-      diff: true,
-    },
-    {
-      feature: "Analytics depth",
-      standard: "Basic",
-      pro: "Advanced",
-      diff: true,
-    },
-    {
-      feature: "Psychology insights",
-      standard: "Limited",
-      pro: "Full",
-      diff: true,
-    },
-    { feature: "Support", standard: "Community", pro: "Priority", diff: true },
-    { feature: "Export CSV", standard: "Yes", pro: "Yes", diff: false },
+    { feature: "Trade entries per month", standard: "100", pro: "Unlimited" },
+    { feature: "Analytics depth", standard: "Basic", pro: "Advanced" },
+    { feature: "Psychology insights", standard: "Limited", pro: "Full" },
+    { feature: "Support", standard: "Community", pro: "Priority" },
+    { feature: "Export CSV", standard: "Yes", pro: "Yes" },
+    { feature: "Broker API integrations", standard: "Limited", pro: "Full" },
+    { feature: "Bulk trade syncs", standard: "No", pro: "Yes" },
+    { feature: "AI trade summaries", standard: "No", pro: "Yes" },
+    { feature: "Custom tags & notes", standard: "Yes", pro: "Yes" },
+    { feature: "Strategy backtesting", standard: "Basic", pro: "Advanced" },
   ];
-  const visible = showDifferencesOnly ? rows.filter((r) => r.diff) : rows;
   return (
     <div className="max-w-4xl mx-auto mt-16">
-      <div className="flex items-center justify-between mb-4">
+      <div className="flex items-center justify-start mb-4">
         <h3 className="text-xl font-bold">Compare Plans</h3>
-        <button
-          onClick={() => setShowDifferencesOnly((v) => !v)}
-          className="px-4 py-2 text-sm rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800"
-        >
-          {showDifferencesOnly ? "Show all features" : "Show differences only"}
-        </button>
       </div>
       <div className="overflow-hidden rounded-2xl border border-slate-200 dark:border-slate-700">
         <table className="w-full text-sm">
@@ -185,7 +165,7 @@ function PricingComparison() {
             </tr>
           </thead>
           <tbody className="divide-y divide-slate-200 dark:divide-slate-800">
-            {visible.map((r) => (
+            {rows.map((r) => (
               <tr key={r.feature}>
                 <td className="px-4 py-3">{r.feature}</td>
                 <td className="px-4 py-3">

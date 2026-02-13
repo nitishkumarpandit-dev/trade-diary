@@ -290,7 +290,7 @@ export default function SettingsClient({
       className={`space-y-8 pb-20 ${isCheckoutOpen ? "blur-sm opacity-60" : ""}`}
     >
       {isCheckoutOpen && (
-        <div className="fixed inset-0 z-[9998] backdrop-blur-md bg-slate-900/50" />
+        <div className="fixed inset-0 z-9998 backdrop-blur-md bg-slate-900/50" />
       )}
       {/* Header */}
       <div>
@@ -369,7 +369,7 @@ export default function SettingsClient({
                   {/* Profile Picture */}
                   <div className="flex items-center gap-6">
                     <div className="relative group">
-                      <div className="w-24 h-24 rounded-2xl bg-gradient-to-tr from-primary to-purple-500 flex items-center justify-center text-white text-3xl font-bold">
+                      <div className="w-24 h-24 rounded-2xl bg-linear-to-tr from-primary to-purple-500 flex items-center justify-center text-white text-3xl font-bold">
                         {user.image ? (
                           <Image
                             src={user.image}
